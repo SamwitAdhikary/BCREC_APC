@@ -3172,10 +3172,6 @@ h6 {
 @media only screen and (max-width: 600px) {
   .navbar {
     padding: 0 1rem;
-    margin: 1rem 0;
-  }
-  body {
-    background-color: #7C32FF;
   }
 }
 
@@ -3185,4 +3181,8 @@ h6 {
   #message {
     color: #000;
   }
+}
+
+.sortable-handler {
+  touch-action: none;
 }
