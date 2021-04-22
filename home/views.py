@@ -31,10 +31,6 @@ def courses_details(request):
 
 
 def contact(request):
-    # info_dict = {
-    #     'message': 'Have any Queries ? <br> Have some suggestion or idea to share ?'
-    # }
-
     if request.method == "POST":
         # fetch data from html Raw form
         name = request.POST.get("name")
@@ -51,6 +47,5 @@ def contact(request):
         send_mail = sendEmail(user_name=name, user_email=email,
                               user_phone=phNo, user_msg=message)
         send_mail.send()
-        # info_dict['message'] = f'Thanks {name} for share your thoughts, <br> we\'ll contact with you soon.'
 
     return render(request, 'home/contact.html')
