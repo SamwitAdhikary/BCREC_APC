@@ -3,8 +3,8 @@ from datetime import date
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-email = "fortesting85977@gmail.com"
-password = "8597791852"
+email = ""
+password = ""
 
 class sendEmail:
     def __init__(self, user_name, user_email, user_phone, user_msg):
