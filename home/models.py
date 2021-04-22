@@ -6,3 +6,6 @@ class Contact(models.Model):
     email = models.EmailField()
     phone_number = models.BigIntegerField()
     message = models.TextField()
+
+    def __str__(self):
+        return "Message from: " + self.name

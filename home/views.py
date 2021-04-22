@@ -24,18 +24,21 @@ def about(request):
 
 
 def courses(request):
-    return HttpResponse("This is courses page")
+    return render(request, 'home/courses.html')
+
+def courses_details(request):
+    return render(request, 'home/courses-details.html')
 
 
 def contact(request):
-    info_dict = {
-        'message': 'Have any Queries ? <br> Have some suggestion or idea to share ?'
-    }
+    # info_dict = {
+    #     'message': 'Have any Queries ? <br> Have some suggestion or idea to share ?'
+    # }
 
     if request.method == "POST":
         # fetch data from html Raw form
         name = request.POST.get("name")
-        phNo = request.POST.get("ph_No")
+        phNo = request.POST.get("phone")
         email = request.POST.get("email")
         message = request.POST.get("message")
 
@@ -48,6 +51,6 @@ def contact(request):
         send_mail = sendEmail(user_name=name, user_email=email,
                               user_phone=phNo, user_msg=message)
         send_mail.send()
-        info_dict['message'] = f'Thanks {name} for share your thoughts, <br> we\'ll contact with you soon.'
+        # info_dict['message'] = f'Thanks {name} for share your thoughts, <br> we\'ll contact with you soon.'
 
-    return render(request, 'home/contact.html', info_dict)
+    return render(request, 'home/contact.html')
