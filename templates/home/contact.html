@@ -2,158 +2,104 @@
 
 {% block banner %}
 
-	<!-- ================ start banner Area ================= -->
-	<section class="banner-area">
-		<div class="container">
-			<div class="row justify-content-center align-items-center">
-				<div class="col-lg-12 banner-right">
-					<h1 class="text-white">
-						Contacts
-					</h1>
-					<p class="mx-auto text-white  mt-20 mb-40">
-						In the history of modern astronomy, there is probably no one greater leap forward than the building.
-					</p>
-					<div class="link-nav">
-						<span class="box">
-							<a href="/">Home </a>
-							<i class="lnr lnr-arrow-right"></i>
-							<a href="/contact">Contacts</a>
-						</span>
-					</div>
+<!-- ================ start banner Area ================= -->
+<section class="banner-area">
+	<div class="container">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-12 banner-right">
+				<h1 class="text-white">
+					Contacts
+				</h1>
+				<p class="mx-auto text-white  mt-20 mb-40">
+					Have any queries, feel free to contact us. We're here to assist you.
+				</p>
+				<div class="link-nav">
+					<span class="box">
+						<a href="/">Home </a>
+						<i class="lnr lnr-arrow-right"></i>
+						<a href="/contact">Contacts</a>
+					</span>
 				</div>
 			</div>
 		</div>
-	</section>
-	<!-- ================ End banner Area ================= -->
+	</div>
+</section>
+<!-- ================ End banner Area ================= -->
 
 {% endblock banner %}
 
-
 {% block registration %}
 
-<!-- ================ Start Registration Area ================= -->
-<!-- <section class="registration-area">
-    <div class="container">
-        <div class="row align-items-end">
-            <div class="col-lg-5">
-                <div class="section-title text-left text-white">
-                    <h2 class="text-white">
-                        {{ message|safe }} 
-                    </h2>
-                    <p>
-                       What're you waiting for, Just feel free to ask us any questions and share your thoughts, we're
-                       eagerly waiting for that.
-                    </p>
-                </div>
-            </div>
-            <div class="offset-lg-3 col-lg-4 col-md-6">
-                <div class="course-form-section">
-                    <h3 class="text-white">Share your thoughts</h3>
-                    <p class="text-white">astric(*) fields are required</p>
-                    <form class="course-form-area contact-page-form course-form text-right" id="myForm"
-                        method="POST">
-                        {% csrf_token %}
-                        <div class="form-group col-md-12">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name*"
-                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" required>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <input type="text" class="form-control" id="subject" name="ph_No"
-                                placeholder="Phone Number" onfocus="this.placeholder = ''"
-                                onblur="this.placeholder = 'Phone Number'">
-                        </div>
-                        <div class="form-group col-md-12">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email Address*"
-                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'" required>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <input type="message" class="form-control" id="message" name="message" placeholder="write someting*"
-                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'we\'re hearing'" required>
-                        </div>
-                        <div class="col-lg-12 text-center">
-                            <button class="btn text-uppercase">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-<!-- ================ End Registration Area ================= -->
-
-	<!-- ================ Start contact-page Area  ================= -->
-	<section class="contact-page-area section-gap">
-		<div class="container">
-			<div class="row">
-				<div class="map-wrap" style="width:100%;" id="map"></div>
-				<div class="col-lg-4 d-flex flex-column address-wrap">
-					<div class="single-contact-address d-flex flex-row">
-						<div class="icon">
-							<span class="lnr lnr-home"></span>
-						</div>
-						<div class="contact-details">
-							<h5>Fuljhore, Durgapur</h5>
-							<p>
-								Paschim Barddhaman, 713206
-							</p>
-						</div>
+<!-- ================ Start contact-page Area  ================= -->
+<section class="contact-page-area section-gap">
+	<div class="container">
+		<div class="row">
+			<div class="map-wrap" style="width:100%;" id="map"></div>
+			<div class="col-lg-4 d-flex flex-column address-wrap">
+				<div class="single-contact-address d-flex flex-row">
+					<div class="icon">
+						<span class="lnr lnr-home"></span>
 					</div>
-					<div class="single-contact-address d-flex flex-row">
-						<div class="icon">
-							<span class="lnr lnr-phone-handset"></span>
-						</div>
-						<div class="contact-details">
-							<h5>343-2500025, 2504106, 2501353</h5>
-							<p>Tuesday to Saturday, 10:00 AM to 5:30 PM</p>
-							<p><em>To be noted: We are closed on Sundays and Mondays.</em></p>
-						</div>
-					</div>
-					<div class="single-contact-address d-flex flex-row">
-						<div class="icon">
-							<span class="lnr lnr-envelope"></span>
-						</div>
-						<div class="contact-details">
-							<h5>apc@bcrec.ac.in</h5>
-							<p>Send us your query anytime!</p>
-						</div>
+					<div class="contact-details">
+						<h5>Fuljhore, Durgapur</h5>
+						<p>
+							Paschim Barddhaman, 713206
+						</p>
 					</div>
 				</div>
-				<div class="col-lg-8">
-					<form class="form-area contact-form text-right" id="myForm" action="/contact/" method="post">
-                        {% csrf_token %}
-						<div class="row">
-							<div class="col-lg-6 form-group">
-								<input name="name" id="name" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'"
-								 class="common-input mb-20 form-control" required="" type="text">
-
-								<input name="email" id="email" placeholder="Enter email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
-								 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mb-20 form-control"
-								 required="" type="email">
-
-								<input name="phone" id="phone" placeholder="Enter Phone Number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'"
-								 class="common-input mb-20 form-control" required="" type="text">
-							</div>
-							<div class="col-lg-6 form-group">
-								<textarea class="common-textarea form-control" name="message"
-                                id="message" placeholder="Enter Messege" onfocus="this.placeholder = ''"
-								 onblur="this.placeholder = 'Enter Messege'" required=""></textarea>
-							</div>
-							<div class="col-lg-12">
-								<div class="alert-msg" style="text-align: left;"></div>
-								<button class="btn" style="float: right;">Send Message</button>
-							</div>
-						</div>
-					</form>
+				<div class="single-contact-address d-flex flex-row">
+					<div class="icon">
+						<span class="lnr lnr-phone-handset"></span>
+					</div>
+					<div class="contact-details">
+						<h5>343-2500025, 2504106, 2501353</h5>
+						<p>Tuesday to Saturday, 10:00 AM to 5:30 PM</p>
+						<p><em>To be noted: We are closed on Sundays and Mondays.</em></p>
+					</div>
+				</div>
+				<div class="single-contact-address d-flex flex-row">
+					<div class="icon">
+						<span class="lnr lnr-envelope"></span>
+					</div>
+					<div class="contact-details">
+						<h5>apc@bcrec.ac.in</h5>
+						<p>Send us your query anytime!</p>
+					</div>
 				</div>
 			</div>
+			<div class="col-lg-8">
+				<form class="form-area contact-form text-right" id="myForm" action="/contact/" method="post">
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-lg-6 form-group">
+							<input name="name" id="name" placeholder="Enter your name" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control"
+								required="" type="text">
+
+							<input name="email" id="email" placeholder="Enter email address"
+								pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'"
+								class="common-input mb-20 form-control" required="" type="email">
+
+							<input name="phone" id="phone" placeholder="Enter Phone Number"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'"
+								class="common-input mb-20 form-control" required="" type="text">
+						</div>
+						<div class="col-lg-6 form-group">
+							<textarea class="common-textarea form-control" name="message" id="message"
+								placeholder="Enter Messege" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Enter Messege'" required=""></textarea>
+						</div>
+						<div class="col-lg-12">
+							<div class="alert-msg" style="text-align: left;"></div>
+							<button class="btn" style="float: right;">Send Message</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
-	</section>
-	<!-- ================ End contact-page Area ================= -->
-
-    {% block script %}
-
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-
-    {% endblock script %}
+	</div>
+</section>
+<!-- ================ End contact-page Area ================= -->
 
 {% endblock registration %}

@@ -88,20 +88,21 @@
         </div>
       </div>
       <div class="owl-carousel popuar-course-carusel">
-        {% for course in courses %}
-          <div class="single-popular-course">
-            <div class="thumb">
-              <img style="width: 300px; height: 260px;" class="f-img img-fluid mx-auto" src="{{ course.imgUrl }}" alt="" />
-            </div>
-            <div class="details">
-              <div class="d-flex justify-content-between mb-20">
-                <p class="name">{{ course.full_name }}</p>
-              </div>
-              <a href="#">
-                <h4>{{ course.name }}</h4>
-              </a>
-            </div>
+        {% load static %}
+        {% for course in allcourses %}
+        <div class="single-popular-course">
+          <div class="thumb">
+            <img style="width: 300px; height: 260px;" class="f-img img-fluid mx-auto" src="/media/{{course.image}}" alt="" />
           </div>
+          <div class="details">
+            <div class="d-flex justify-content-between mb-20">
+              <p class="name">{{ course.description }}</p>
+            </div>
+            <a href="/courses/{{course.slug}}">
+              <h4>{{ course.title }}</h4>
+            </a>
+          </div>
+        </div>
         {% endfor %}
       </div>
     </div>
