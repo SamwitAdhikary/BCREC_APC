@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Courses(models.Model):
+class Course(models.Model):
     slug = models.CharField(max_length=50, default="", primary_key=True)
     title = models.CharField(max_length=50, default="")
     image = models.ImageField(upload_to="courses/images", default="", blank=True)

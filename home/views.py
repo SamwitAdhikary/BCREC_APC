@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 from .send_email import sendEmail
 from .models import Contact, UserProfileInfo, User
-from courses.models import Courses
+from courses.models import Course
 
 
 # Create your views here.
@@ -20,7 +20,7 @@ def get_data(endpoint):
 
 
 def index(request):
-    allCourses = Courses.objects.all()
+    allCourses = Course.objects.all()
 
     if request.method == "POST":
         name = request.POST.get("name")
@@ -85,8 +85,8 @@ def contact(request):
         new_contact.save()
 
         # Send mail
-        send_mail = sendEmail(user_name=name, user_email=email,
-                              user_phone=phNo, user_msg=message)
-        send_mail.send()
+        # send_mail = sendEmail(user_name=name, user_email=email,
+        #                       user_phone=phNo, user_msg=message)
+        # send_mail.send()
 
     return render(request, 'home/contact.html')
