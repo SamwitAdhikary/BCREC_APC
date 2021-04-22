@@ -1,8 +1,17 @@
+from django.contrib import auth
+from django.http.response import HttpResponseRedirect
 import requests
+
 from django.shortcuts import render, HttpResponse
-from .models import Contact
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+
 from .send_email import sendEmail
+from .models import Contact, UserProfileInfo, User
 from courses.models import Courses
+
 
 # Create your views here.
 def get_data(endpoint):
@@ -13,15 +22,50 @@ def get_data(endpoint):
 def index(request):
     allCourses = Courses.objects.all()
 
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        phNo = request.POST.get("phone")
+
+        if email:
+            user = User(
+                username=name, password=make_password(request.POST.get("password")), email=email)
+            user.save()
+            if phNo:
+                user_details = UserProfileInfo(user=user, phone_number=phNo)
+                user_details.save()
+        else:  
+            user = authenticate(username=name, password=password)
+
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('HomePage'))
+                else:
+                    return HttpResponse("Account is not activated !")
+            else:
+                print(f"Failed login, user-{name}, password-{password}")
+                return HttpResponse("Wrong Credentials !")
+
     context = {
         'allcourses': allCourses,
         'yt_videos': get_data('https://api.npoint.io/1e3ad07b9c9b7fcf4f20'),
         'developers': get_data('https://api.npoint.io/952ccba723fbe7772407')
-    
+
     }
 
     return render(request, 'home/index.html', context)
 
+
+@login_required
+def logoutUser(request):
+   logout(request)
+   return HttpResponseRedirect(reverse('HomePage'))
+
+@login_required
+def secret_page(request):
+    return HttpResponse("You're Logged In !")
 
 def about(request):
     return HttpResponse("This is about page")
