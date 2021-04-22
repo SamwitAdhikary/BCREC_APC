@@ -76,165 +76,40 @@
 
 {% block popular-courses %}
 
-  <!-- ================ Start Popular Course Area ================= -->
-  <section class="popular-course-area section-gap">
-    <div class="container-fluid">
-      <div class="row justify-content-center section-title">
-        <div class="col-lg-12">
-          <h2>
-            Popular Courses <br />
-            Available Right Now
-          </h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-        </div>
-      </div>
-      <div class="owl-carousel popuar-course-carusel">
-        <div class="single-popular-course">
-          <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="/static/img/popular-course/p1.jpg" alt="" />
-          </div>
-          <div class="details">
-            <div class="d-flex justify-content-between mb-20">
-              <p class="name">programming language</p>
-              <p class="value">$150</p>
-            </div>
-            <a href="/courses-details">
-              <h4>Learn Angular JS Course for Legendary Persons</h4>
-            </a>
-            <div class="bottom d-flex mt-15">
-              <ul class="list">
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-              </ul>
-              <p class="ml-20">25 Reviews</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="single-popular-course">
-          <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="/static/img/popular-course/p2.jpg" alt="" />
-          </div>
-          <div class="details">
-            <div class="d-flex justify-content-between mb-20">
-              <p class="name">programming language</p>
-              <p class="value">$150</p>
-            </div>
-            <a href="/courses-details">
-              <h4>Learn Angular JS Course for Legendary Persons</h4>
-            </a>
-            <div class="bottom d-flex mt-15">
-              <ul class="list">
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-              </ul>
-              <p class="ml-20">25 Reviews</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="single-popular-course">
-          <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="/static/img/popular-course/p3.jpg" alt="" />
-          </div>
-          <div class="details">
-            <div class="d-flex justify-content-between mb-20">
-              <p class="name">programming language</p>
-              <p class="value">$150</p>
-            </div>
-            <a href="/courses-details">
-              <h4>Learn Angular JS Course for Legendary Persons</h4>
-            </a>
-            <div class="bottom d-flex mt-15">
-              <ul class="list">
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-              </ul>
-              <p class="ml-20">25 Reviews</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="single-popular-course">
-          <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="/static/img/popular-course/p4.jpg" alt="" />
-          </div>
-          <div class="details">
-            <div class="d-flex justify-content-between mb-20">
-              <p class="name">programming language</p>
-              <p class="value">$150</p>
-            </div>
-            <a href="/courses-details">
-              <h4>Learn Angular JS Course for Legendary Persons</h4>
-            </a>
-            <div class="bottom d-flex mt-15">
-              <ul class="list">
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-              </ul>
-              <p class="ml-20">25 Reviews</p>
-            </div>
-          </div>
-        </div>
+ <!-- ================ Start Popular Course Area ================= -->
+ <section class="popular-course-area section-gap">
+  <div class="container-fluid">
+    <div class="row justify-content-center section-title">
+      <div class="col-lg-12">
+        <h2>
+          Choose your Course <br />
+        </h2>
+        <p>
+          Choose your course from the list. Now only Maulana Abul Kalam Azad University of
+          Technology questions are available. We'll scalable it later.
+        </p>
       </div>
     </div>
-  </section>
-  <!-- ================ End Popular Course Area ================= -->
+    <div class="owl-carousel popuar-course-carusel">
+      {% for course in allcourses %}
+        <div class="single-popular-course">
+          <div class="thumb">
+            <img style="width: 300px; height: 260px;" class="f-img img-fluid mx-auto" src="/media/{{course.image}}" alt="" />
+          </div>
+          <div class="details">
+            <div class="d-flex justify-content-between mb-20">
+              <p class="name">{{ course.description }}</p>
+            </div>
+            <a href="/courses/{{course.slug}}">
+              <h4>{{ course.title }}</h4>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- ================ End Popular Course Area ================= -->
 
 {% endblock popular-courses %}
 

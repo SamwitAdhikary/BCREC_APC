@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'blog.apps.BlogConfig',
+    'courses.apps.CoursesConfig'
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'static/'
 ]
+
+#Added Media
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # for Django 3.2 and fixing DEFAULT_AUTO_FIELD warnings
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
