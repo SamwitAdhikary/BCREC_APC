@@ -3162,3 +3162,27 @@ h6 {
         transition: all 0.3s ease 0s; }
 
 /*# sourceMappingURL=main.css.map */
+
+/* My Css */
+/* Navbar */
+.navbar {
+  padding: 3rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+}
+
+/* Input box */
+/* For 1024 Resolution */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1920px) {
+  #message {
+    color: #000;
+  }
+}
+
+.sortable-handler {
+  touch-action: none;
+}

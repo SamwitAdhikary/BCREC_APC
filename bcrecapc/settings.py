@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'static/'
 ]
+
+# for Django 3.2 and fixing DEFAULT_AUTO_FIELD warnings
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
