@@ -4,24 +4,29 @@
 
 <!-- ================ start banner Area ================= -->
 <section class="home-banner-area">
-    <div class="container">
-      <div class="row justify-content-center fullscreen align-items-center">
-        <div class="col-lg-5 col-md-8 home-banner-left">
-          <h1 class="text-white">
-            Previous Year Examination <br />
-            Question Papers
-          </h1>
-          <p class="mx-auto text-white  mt-20 mb-40">
-            Get all previous years MAKAUT Question Paper for Free <br>- at one click.
-          </p>
-        </div>
-        <div class="offset-lg-2 col-lg-5 col-md-12 home-banner-right">
-          <img class="img-fluid" src="/static/img/header-img.png" alt="" />
-        </div>
+  <div class="container">
+    <div class="row justify-content-center fullscreen align-items-center">
+      <div class="col-lg-5 col-md-8 home-banner-left">
+        <h1 class="text-white">
+          {% if user.is_authenticated %}
+          Welcome <br>
+          {{ user.username }}
+          {% else %}
+          Previous Year Examination <br />
+          Question Papers
+          {% endif %}
+        </h1>
+        <p class="mx-auto text-white  mt-20 mb-40">
+          Get all previous years MAKAUT Question Paper for Free <br>- at one click.
+        </p>
+      </div>
+      <div class="offset-lg-2 col-lg-5 col-md-12 home-banner-right">
+        <img class="img-fluid" src="/static/img/header-img.png" alt="" />
       </div>
     </div>
-  </section>
-  <!-- ================ End banner Area ================= -->
+  </div>
+</section>
+<!-- ================ End banner Area ================= -->
 
 {% endblock banner %}
 
@@ -29,85 +34,87 @@
 
 <!-- ================ Start Feature Area ================= -->
 <section class="feature-area">
-    <div class="container-fluid">
-      <div class="feature-inner row">
-        <div class="col-lg-2 col-md-6">
-          <div class="feature-item d-flex">
-            <i class="ti-book"></i>
-            <div class="ml-20">
-              <h4>Question Paper</h4>
-              <p>
-                Get every semester question paper with solved answers.
-              </p>
-            </div>
+  <div class="container-fluid">
+    <div class="feature-inner row">
+      <div class="col-lg-2 col-md-6">
+        <div class="feature-item d-flex">
+          <i class="ti-book"></i>
+          <div class="ml-20">
+            <h4>Question Paper</h4>
+            <p>
+              Get every semester question paper with solved answers.
+            </p>
           </div>
         </div>
-        <div class="col-lg-2 col-md-6">
-          <div class="feature-item d-flex">
-            <i class="ti-cup"></i>
-            <div class="ml-20">
-              <h4>Notices & Notes</h4>
-              <p>
-                Stay UpTo Date with latest notices and curriculum, Also Share and access your current semester notes with your friends.
-              </p>
-            </div>
+      </div>
+      <div class="col-lg-2 col-md-6">
+        <div class="feature-item d-flex">
+          <i class="ti-cup"></i>
+          <div class="ml-20">
+            <h4>Notices & Notes</h4>
+            <p>
+              Stay UpTo Date with latest notices and curriculum, Also Share and access your current semester notes with
+              your friends.
+            </p>
           </div>
         </div>
-        <div class="col-lg-2 col-md-6">
-          <div class="feature-item d-flex border-right-0">
-            <i class="ti-desktop"></i>
-            <div class="ml-20">
-              <h4>Full E-Books</h4>
-              <p>
-                Access PDFs and E-Books in this Pandamic Situation.
-              </p>
-            </div>
+      </div>
+      <div class="col-lg-2 col-md-6">
+        <div class="feature-item d-flex border-right-0">
+          <i class="ti-desktop"></i>
+          <div class="ml-20">
+            <h4>Full E-Books</h4>
+            <p>
+              Access PDFs and E-Books in this Pandamic Situation.
+            </p>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <!-- ================ End Feature Area ================= -->
+  </div>
+</section>
+<!-- ================ End Feature Area ================= -->
 
 {% endblock feature %}
 
 {% block popular-courses %}
 
- <!-- ================ Start Popular Course Area ================= -->
- <section class="popular-course-area section-gap">
-    <div class="container-fluid">
-      <div class="row justify-content-center section-title">
-        <div class="col-lg-12">
-          <h2>
-            Choose your Course <br />
-          </h2>
-          <p>
-            Choose your course from the list. Now only Maulana Abul Kalam Azad University of
-            Technology questions are available. We'll scalable it later.
-          </p>
-        </div>
-      </div>
-      <div class="owl-carousel popuar-course-carusel">
-        {% load static %}
-        {% for course in allcourses %}
-        <div class="single-popular-course">
-          <div class="thumb">
-            <img style="width: 300px; height: 260px;" class="f-img img-fluid mx-auto" src="/media/{{course.image}}" alt="" />
-          </div>
-          <div class="details">
-            <div class="d-flex justify-content-between mb-20">
-              <p class="name">{{ course.description }}</p>
-            </div>
-            <a href="/courses/{{course.slug}}">
-              <h4>{{ course.title }}</h4>
-            </a>
-          </div>
-        </div>
-        {% endfor %}
+<!-- ================ Start Popular Course Area ================= -->
+<section class="popular-course-area section-gap">
+  <div class="container-fluid">
+    <div class="row justify-content-center section-title">
+      <div class="col-lg-12">
+        <h2>
+          {{ user.username|title }} Choose your Course <br />
+        </h2>
+        <p>
+          Choose your course from the list. Now only Maulana Abul Kalam Azad University of
+          Technology questions are available. We'll scalable it later.
+        </p>
       </div>
     </div>
-  </section>
-  <!-- ================ End Popular Course Area ================= -->
+    <div class="owl-carousel popuar-course-carusel">
+      {% load static %}
+      {% for course in allcourses %}
+      <div class="single-popular-course">
+        <div class="thumb">
+          <img style="width: 300px; height: 260px;" class="f-img img-fluid mx-auto" src="/media/{{course.image}}"
+            alt="" />
+        </div>
+        <div class="details">
+          <div class="d-flex justify-content-between mb-20">
+            <p class="name">{{ course.description }}</p>
+          </div>
+          <a href="/courses/{{course.slug}}">
+            <h4>{{ course.title }}</h4>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- ================ End Popular Course Area ================= -->
 
 {% endblock popular-courses %}
 
@@ -133,21 +140,20 @@
       <div class="offset-lg-1 col-md-6 video-left">
         <div class="owl-carousel video-carousel">
           {% for video in yt_videos %}
-            <div class="single-video">
-              <div class="video-part">
-                <img class="img-fluid" src="{{ video.imgUrl }}"
-                  alt="">
-                <div class="overlay"></div>
-                <a class="popup-youtube play-btn" href="{{ video.link }}">
-                  <img class="play-icon" src="/static/img/play-btn.png" alt="">
-                </a>
-              </div>
-              <h2 style="color: #fff !important;" class="text-white mb-20 mt-30">{{ video.title }}</h2>
-              <h3 style="color: #f8f5f1 !important;" class="text-white mb-20"> {{ video.desc }} </h3>
-              <p class="text-white mb-20">
-                Interset in Python ? Check this <a href="https://www.codearena.ga/">CodeArena</a>
-              </p>
+          <div class="single-video">
+            <div class="video-part">
+              <img class="img-fluid" src="{{ video.imgUrl }}" alt="">
+              <div class="overlay"></div>
+              <a class="popup-youtube play-btn" href="{{ video.link }}">
+                <img class="play-icon" src="/static/img/play-btn.png" alt="">
+              </a>
             </div>
+            <h2 style="color: #fff !important;" class="text-white mb-20 mt-30">{{ video.title }}</h2>
+            <h3 style="color: #f8f5f1 !important;" class="text-white mb-20"> {{ video.desc }} </h3>
+            <p class="text-white mb-20">
+              Interset in Python ? Check this <a href="https://www.codearena.ga/">CodeArena</a>
+            </p>
+          </div>
           {% endfor %}
         </div>
       </div>
@@ -160,95 +166,95 @@
 
 {% block again-feature %}
 
-  <!-- ================ Start Feature Area ================= -->
-  <section class="other-feature-area">
-    <div class="container">
-      <div class="feature-inner row">
-        <div class="col-lg-12">
-          <div class="section-title text-left">
-            <h2>
-              Features That <br />
-              Can Make your life Easy
-            </h2>
+<!-- ================ Start Feature Area ================= -->
+<section class="other-feature-area">
+  <div class="container">
+    <div class="feature-inner row">
+      <div class="col-lg-12">
+        <div class="section-title text-left">
+          <h2>
+            Features That <br />
+            Can Make your life Easy
+          </h2>
+          <p>
+            We provide some awesome features that will not only help you in your semester result,
+            also, it'll help you with placement and self-development aspects.
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="other-feature-item">
+          <i class="ti-key"></i>
+          <h4>Access Question and Answers</h4>
+          <div>
             <p>
-                We provide some awesome features that will not only help you in your semester result,
-                also, it'll help you with placement and self-development aspects.
+              Access your previous year questions and answers in one click, at any time, any place.
             </p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="other-feature-item">
-            <i class="ti-key"></i>
-            <h4>Access Question and Answers</h4>
-            <div>
-              <p>
-                Access your previous year questions and answers in one click, at any time, any place.
-              </p>
-            </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mt--160">
+        <div class="other-feature-item">
+          <i class="ti-files"></i>
+          <h4>Share Files</h4>
+          <div>
+            <p>
+              Access your semester notes, Upload your notes, share with your friends, and Be Cool ;)
+            </p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 mt--160">
-          <div class="other-feature-item">
-            <i class="ti-files"></i>
-            <h4>Share Files</h4>
-            <div>
-              <p>
-                Access your semester notes, Upload your notes, share with your friends, and Be Cool ;)
-              </p>
-            </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mt--260">
+        <div class="other-feature-item">
+          <i class="ti-medall-alt"></i>
+          <h4> <span style="letter-spacing: 2px;">BCRECIAN</span><br>Premium Membership</h4>
+          <div>
+            <p>
+              As a student of BCREC, you can upload your documents, CV, Portfolio, Certificates, Routines, etc.
+              You can access and share them when you need them, with one click.
+            </p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 mt--260">
-          <div class="other-feature-item">
-            <i class="ti-medall-alt"></i>
-            <h4> <span style="letter-spacing: 2px;">BCRECIAN</span><br>Premium Membership</h4>
-            <div>
-              <p>
-                As a student of BCREC, you can upload your documents, CV, Portfolio, Certificates, Routines, etc.
-                You can access and share them when you need them, with one click.
-              </p>
-            </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="other-feature-item">
+          <i class="ti-briefcase"></i>
+          <h4>Notices and Routines</h4>
+          <div>
+            <p>
+              Get all of your class Routine, Notices, teachers Contact details, in one place.
+            </p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="other-feature-item">
-            <i class="ti-briefcase"></i>
-            <h4>Notices and Routines</h4>
-            <div>
-              <p>
-                Get all of your class Routine, Notices, teachers Contact details, in one place.
-              </p>
-            </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mt--160">
+        <div class="other-feature-item">
+          <i class="ti-crown"></i>
+          <h4>Expert Mentors</h4>
+          <div>
+            <p>
+              We've Expert mentors for your help. Anytime Feels stuck or have a query,
+              Just <a href="/contact">write</a> to us. You'll assist.
+            </p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 mt--160">
-          <div class="other-feature-item">
-            <i class="ti-crown"></i>
-            <h4>Expert Mentors</h4>
-            <div>
-              <p>
-                We've Expert mentors for your help. Anytime Feels stuck or have a query,
-                Just <a href="/contact">write</a> to us. You'll assist.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mt--260">
-          <div class="other-feature-item">
-            <i class="ti-headphone-alt"></i>
-            <h4>Contributions</h4>
-            <div>
-              <p>
-                Want to work with us? Just let us know. We need students like you for maintaining and keep
-                updating our servers.
-              </p>
-            </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mt--260">
+        <div class="other-feature-item">
+          <i class="ti-headphone-alt"></i>
+          <h4>Contributions</h4>
+          <div>
+            <p>
+              Want to work with us? Just let us know. We need students like you for maintaining and keep
+              updating our servers.
+            </p>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <!-- ================ End Feature Area ================= -->
+  </div>
+</section>
+<!-- ================ End Feature Area ================= -->
 
 {% endblock again-feature %}
 
@@ -267,7 +273,7 @@
               <h3>Developers behind the Project</h3>
               <div class="mt-40 text">
                 <p>
-                  {{ dev.desc|safe }}  
+                  {{ dev.desc|safe }}
                 </p>
               </div>
               <h4>{{ dev.name }}</h4>
@@ -289,49 +295,58 @@
 
 {% block registration %}
 
-  <!-- ================ Start Registration Area ================= -->
-  <section class="registration-area">
-    <div class="container">
-      <div class="row align-items-end">
-        <div class="col-lg-5">
-          <div class="section-title text-left text-white">
-            <h2 class="text-white">
-              Register Now, <br>
-              and Unlock all the Features
-            </h2>
-            <p>
-              If you are BCRECIAN, then what're you waiting for? Just register and make your life easy.
-              We secure credentials with the most advanced hashing techniques.
-            </p>
-          </div>
+<!-- ================ Start Registration Area ================= -->
+<section class="registration-area" id="Registration-Section">
+  <div class="container">
+    <div class="row align-items-end">
+      <div class="col-lg-5">
+        <div class="section-title text-left text-white">
+          <h2 class="text-white">
+            Register Now, <br>
+            and Unlock all the Features
+          </h2>
+          <p>
+            If you are BCRECIAN, then what're you waiting for? Just register and make your life easy.
+            We secure credentials with the most advanced hashing techniques.
+          </p>
         </div>
-        <div class="offset-lg-3 col-lg-4 col-md-6">
-          <div class="course-form-section">
-            <h3 class="text-white">Register</h3>
-            <p class="text-white">It is high time for learning</p>
-            <form class="course-form-area contact-page-form course-form text-right" id="myForm" action="mail.html" method="post">
-              <div class="form-group col-md-12">
-                <input type="text" class="form-control" id="name" name="name" placeholder="Name" onfocus="this.placeholder = ''"
-                 onblur="this.placeholder = 'Name'">
-              </div>
-              <div class="form-group col-md-12">
-                <input type="text" class="form-control" id="subject" name="subject" placeholder="Phone Number" onfocus="this.placeholder = ''"
-                 onblur="this.placeholder = 'Phone Number'">
-              </div>
-              <div class="form-group col-md-12">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''"
-                 onblur="this.placeholder = 'Email Address'">
-              </div>
-              <div class="col-lg-12 text-center">
-                <button class="btn text-uppercase">Submit</button>
-              </div>
-            </form>
+      </div>
+      <div class="offset-lg-3 col-lg-4 col-md-6">
+        <div class="course-form-section">
+          <h3 id="formType" class="text-white">Register</h3>
+          <p class="text-white">It is high time for learning</p>
+          <form class="course-form-area contact-page-form course-form text-right" id="myForm" method="POST">
+            {% csrf_token %}
+            <div class="form-group col-md-12">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Name"
+                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" required>
+            </div>
+            <div class="form-group col-md-12">
+              <input type="tel" class="form-control" id="phNo" name="phone" placeholder="Phone Number"
+                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone Number'">
+            </div>
+            <div class="form-group col-md-12">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email Address"
+                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'" required>
+            </div>
+            <div class="form-group col-md-12">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required>
+            </div>
+            <div class="col-lg-12 text-center">
+              <button id="toogleBtn" class="btn text-uppercase">Register</button>
+            </div>
+          </form>
+          <div id="login">
+            <p>Already have an account ?</p>
+            <a onclick="toggleForm()" class="text-black" href="#Registration-Section">Login Here</a>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <!-- ================ End Registration Area ================= -->
+  </div>
+</section>
+<!-- ================ End Registration Area ================= -->
 
 {% endblock registration %}
 

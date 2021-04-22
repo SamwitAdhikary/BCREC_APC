@@ -3186,3 +3186,25 @@ h6 {
 .sortable-handler {
   touch-action: none;
 }
+
+/* Login Form */
+#login {
+  padding: 1rem;
+  color: #a367e7;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+@media only screen and (max-width: 600px) {
+  #login {
+    color: #fff;
+  }
+
+  #login a {
+    color: #fff;
+  }
+
+  #login a:hover {
+    color: #73fbaf;
+  }
+}
