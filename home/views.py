@@ -38,13 +38,16 @@ def index(request):
             phNo = request.POST.get("phone")
 
             if email:
-                user = User(
-                    username=name, password=make_password(request.POST.get("password")), email=email)
-                user.save()
-                if phNo:
-                    user_details = UserProfileInfo(user=user, phone_number=phNo)
-                    user_details.save()
-                    login(request, user)
+                verify_user(request, email, password)
+                
+                
+                # user = User(
+                #     username=name, password=make_password(request.POST.get("password")), email=email)
+                # user.save()
+                # if phNo:
+                #     user_details = UserProfileInfo(user=user, phone_number=phNo)
+                #     user_details.save()
+                #     login(request, user)
             else:  
                 user = authenticate(username=name, password=password)
 
@@ -70,6 +73,15 @@ def index(request):
     }
 
     return render(request, 'home/index.html', context)
+
+
+def verify_user(request, email, password):
+    if request.method == "POST":
+        print(request, email, password)
+        return render(request, 'home/verify-otp.html', {
+            'email': email
+        })
+
 
 
 @login_required
