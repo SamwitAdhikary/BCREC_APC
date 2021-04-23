@@ -1,8 +1,8 @@
-from django.contrib import auth
+from random import randint
 from django.http.response import HttpResponseRedirect
 import requests
 
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -12,11 +12,16 @@ from .send_email import sendEmail
 from .models import Contact, UserProfileInfo, User, YoutubeVideos, Developers
 from courses.models import Course
 
+# CONSTANTS
+OTP = None
 
 # Create your views here.
+
+
 def get_data(endpoint):
     response = requests.get(endpoint)
     return response.json()
+
 
 def checkUser(username):
     """ return True if user already have an account, otherwise False """
@@ -26,72 +31,75 @@ def checkUser(username):
 def index(request):
     allCourses = Course.objects.all()
     youtube_videos = YoutubeVideos.objects.all()
-    # print(youtube_videos)
     developers = Developers.objects.all()
-    # print(developers)
 
     if request.method == "POST":
         name = request.POST.get("name")
-        if not checkUser(name):
-            email = request.POST.get("email")
-            password = request.POST.get("password")
-            phNo = request.POST.get("phone")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        phNo = request.POST.get("phone")
 
-            if email:
-                verify_user(request, email, password)
-                
-                
-                # user = User(
-                #     username=name, password=make_password(request.POST.get("password")), email=email)
-                # user.save()
-                # if phNo:
-                #     user_details = UserProfileInfo(user=user, phone_number=phNo)
-                #     user_details.save()
-                #     login(request, user)
-            else:  
-                user = authenticate(username=name, password=password)
-
-                if user:
-                    if user.is_active:
-                        login(request, user)
-                        return HttpResponseRedirect(reverse('HomePage'))
-                    else:
-                        return HttpResponse("Account is not activated !")
-                else:
-                    print(f"Failed login, user-{name}, password-{password}")
-                    return HttpResponse("Wrong Credentials !")
+        if email:
+            if checkUser(name):
+                return HttpResponse("You already have an account, Kindly Login IN !!")
+            return verify_otp(request, email, name, make_password(password), phNo)
         else:
-            return HttpResponse("You already have an account, Kindly Login IN !!")
-
-
+            user = authenticate(username=name, password=password)
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('HomePage'))
+                else:
+                    return HttpResponse("Account is not activated !")
+            else:
+                print(f"Failed login, user-{name}, password-{password}")
+                return HttpResponse("Wrong Credentials !")
     context = {
         'allcourses': allCourses,
         'yt_videos': youtube_videos,
         'developers': developers
-        # 'developers': get_data('https://api.npoint.io/952ccba723fbe7772407')
-
     }
-
     return render(request, 'home/index.html', context)
 
 
-def verify_user(request, email, password):
+def verify_otp(request, email, name, password, phNo):
+    global OTP
     if request.method == "POST":
-        print(request, email, password)
-        return render(request, 'home/verify-otp.html', {
-            'email': email
-        })
+        if not OTP:
+            OTP = randint(1111, 9999)
+            print(OTP)
+            send_mail = sendEmail(user_name=name,user_email=email)
+            send_mail.sendOtp(otp=OTP)
+        else:
+            user_otp = request.POST.get('otp')
+            if user_otp and int(user_otp) == OTP:
+                OTP = None
+                user = User(username=name, password=password, email=email)
+                user.save()
+                if phNo:
+                    user_details = UserProfileInfo(
+                        user=user, phone_number=phNo)
+                    user_details.save()
+                login(request, user)
+                return redirect('HomePage')
+            OTP = None
+            return HttpResponse("Wrong OTP, Try again ! <a href='/'>Back to Home</a>")
 
+        return render(request, 'home/verify-otp.html', {
+            'email': email, 'username': name, 'password': password, 'phNo': phNo
+        })
 
 
 @login_required
 def logoutUser(request):
-   logout(request)
-   return HttpResponseRedirect(reverse('HomePage'))
+    logout(request)
+    return HttpResponseRedirect(reverse('HomePage'))
+
 
 @login_required
 def secret_page(request):
     return HttpResponse("You're Logged In !")
+
 
 def about(request):
     return HttpResponse("This is about page")
