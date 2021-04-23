@@ -8,6 +8,7 @@ class Course(models.Model):
     image = models.ImageField(upload_to="courses/images", default="")
     description = models.CharField(max_length=100, default="")
     yearsOfCourse = models.IntegerField(default=3)
+    pdfs = models.FileField(upload_to="pdfs", default="")
 
     def __str__(self):
         return self.description
