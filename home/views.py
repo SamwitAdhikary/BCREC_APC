@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 from .send_email import sendEmail
 from .models import Contact, UserProfileInfo, User
-from courses.models import Courses
+from courses.models import Course
 
 
 # Create your views here.
@@ -18,35 +18,44 @@ def get_data(endpoint):
     response = requests.get(endpoint)
     return response.json()
 
+def checkUser(username):
+    """ return True if user already have an account, otherwise False """
+    return User.objects.filter(username=username).exists()
+
 
 def index(request):
-    allCourses = Courses.objects.all()
+    allCourses = Course.objects.all()
 
     if request.method == "POST":
         name = request.POST.get("name")
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        phNo = request.POST.get("phone")
+        if not checkUser(name):
+            email = request.POST.get("email")
+            password = request.POST.get("password")
+            phNo = request.POST.get("phone")
 
-        if email:
-            user = User(
-                username=name, password=make_password(request.POST.get("password")), email=email)
-            user.save()
-            if phNo:
-                user_details = UserProfileInfo(user=user, phone_number=phNo)
-                user_details.save()
-        else:  
-            user = authenticate(username=name, password=password)
-
-            if user:
-                if user.is_active:
+            if email:
+                user = User(
+                    username=name, password=make_password(request.POST.get("password")), email=email)
+                user.save()
+                if phNo:
+                    user_details = UserProfileInfo(user=user, phone_number=phNo)
+                    user_details.save()
                     login(request, user)
-                    return HttpResponseRedirect(reverse('HomePage'))
+            else:  
+                user = authenticate(username=name, password=password)
+
+                if user:
+                    if user.is_active:
+                        login(request, user)
+                        return HttpResponseRedirect(reverse('HomePage'))
+                    else:
+                        return HttpResponse("Account is not activated !")
                 else:
-                    return HttpResponse("Account is not activated !")
-            else:
-                print(f"Failed login, user-{name}, password-{password}")
-                return HttpResponse("Wrong Credentials !")
+                    print(f"Failed login, user-{name}, password-{password}")
+                    return HttpResponse("Wrong Credentials !")
+        else:
+            return HttpResponse("You already have an account, Kindly Login IN !!")
+
 
     context = {
         'allcourses': allCourses,
@@ -85,8 +94,8 @@ def contact(request):
         new_contact.save()
 
         # Send mail
-        send_mail = sendEmail(user_name=name, user_email=email,
-                              user_phone=phNo, user_msg=message)
-        send_mail.send()
+        # send_mail = sendEmail(user_name=name, user_email=email,
+        #                       user_phone=phNo, user_msg=message)
+        # send_mail.send()
 
     return render(request, 'home/contact.html')
