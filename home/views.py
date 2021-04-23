@@ -68,8 +68,8 @@ def verify_otp(request, email, name, password, phNo):
         if not OTP:
             OTP = randint(1111, 9999)
             print(OTP)
-            send_mail = sendEmail(user_name=name,user_email=email)
-            send_mail.sendOtp(otp=OTP)
+            # send_mail = sendEmail(user_name=name,user_email=email)
+            # send_mail.sendOtp(otp=OTP)
         else:
             user_otp = request.POST.get('otp')
             if user_otp and int(user_otp) == OTP:

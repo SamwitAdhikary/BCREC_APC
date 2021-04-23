@@ -14,9 +14,9 @@
         <h1 class="text-white">
           {% if user.is_authenticated %}
           Welcome <br>
-          {{ user.username }}
+          {{ user.username|upper }}
           {% else %}
-          Previous Year Examination <br />
+          Previous Year Examination <br/>
           Question Papers
           {% endif %}
         </h1>

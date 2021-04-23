@@ -267,8 +267,6 @@ function toggleForm() {
 	form_div = document.getElementById("login").childNodes;
 
 	if (form_div[3].innerHTML == "Register") {
-
-		console.log('if');
 		document.getElementById("email").style.display = "inline";
 		document.getElementById("phNo").style.display = "inline";
 		document.getElementById("formType").innerHTML = "Register";
@@ -279,7 +277,6 @@ function toggleForm() {
 		form_div[1].innerHTML = "Already Have an account ?"
 		form_div[3].innerHTML = "Login Here"
 	} else {
-		console.log('else');
 		document.getElementById("email").style.display = "none";
 		document.getElementById("phNo").style.display = "none";
 		document.getElementById("formType").innerHTML = "Login";

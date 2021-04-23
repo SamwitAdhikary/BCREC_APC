@@ -71,6 +71,8 @@
             {% if user.is_authenticated %}
             <li><a href="/">Profile</a></li>
             <li><a href="/logout">logout</a></li>
+            {% else %}
+            <li><a onclick="toggleForm()" href="#Registration-Section">Login</a></li>
             {% endif %}
             <li>
               <button class="search">
