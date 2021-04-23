@@ -34,7 +34,8 @@
 <section class="contact-page-area section-gap">
     <div class="container">
         <p>Check your mail spam folder if you didn't find in Inbox.</p>
-        <form class="form-area contact-form text-right" id="myForm" action="/contact/" method="post">
+        <form class="form-area contact-form text-right" id="myForm"
+            action="/verify-otp/{{email}}/{{password}}/{{username}}/{{phNo}}" method="post">
             {% csrf_token %}
             <div class="row">
                 <div class="col-lg-6 form-group">
@@ -42,7 +43,7 @@
                         onblur="this.placeholder = 'Enter OTP'" class="common-input mb-20 form-control"
                         type="text" required>
                     <div class="col-lg-12" style="margin-bottom: 1rem;">
-                        <a href="">Resend OTP</a>
+                        <a href="">Resend OTP (will be added soon!) </a>
                     </div>
                     <div class="col-lg-12">
                         <div class="alert-msg" style="text-align: left;"></div>

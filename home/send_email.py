@@ -7,7 +7,7 @@ email = ""
 password = ""
 
 class sendEmail:
-    def __init__(self, user_name, user_email, user_phone, user_msg):
+    def __init__(self, user_name, user_email, user_phone=None, user_msg=None):
         self.user_name = user_name
         self.user_email = user_email
         self.user_msg = user_msg
@@ -15,10 +15,10 @@ class sendEmail:
         
         # Create message container - the correct MIME type is multipart/alternative.
         self.msg = MIMEMultipart('alternative')
-        self.msg['Subject'] = "Contact from College"
         self.today = date.today().strftime("%B %d, %Y")
 
     def register_msgBody(self):
+        self.msg['Subject'] = "Contact from College"
         # Create the body of the message (a plain-text and an HTML version).
         self.html = f"""\
         <html>
@@ -43,6 +43,33 @@ class sendEmail:
         </html>
         """
         self.config_msg()
+        
+    def registerOtpBody(self, otp):
+        self.msg['Subject'] = f"{self.user_name} Verify Email for Registration"
+        self.html = f"""\
+        <html>
+          <body style="background-color: #ebecf0;">
+            <div style="background-color:#ebecf0; padding:10px 20px;">
+                <div style="text-align: center;">
+                    <h2 style="font-family:Georgia, 'Times New Roman', Times, serif;color:#2f2187;">
+                        Welcome to <a href="#"><Site Name></a>
+                    </h2>
+                    <img style="height: 250px;width:400px" src="https://i.ibb.co/G9c0S63/header-img.png"
+                alt="welcome-image">
+                    <p>To complete the process of Registration, you need to active your account.</p>
+                    <h3>Your OTP is <a href="#"><em style="color: #6609df;">{otp}</em></a>.</h3> <br><br>
+                    <p>If you didn't intend this, just ignore this message</p>
+                </div>
+                <code>
+                    - Site Name <br>
+                    - <a href="#">Visit Site</a> <br>
+                    - {self.today}
+                </code>
+            </div>
+        </body>
+        </html>
+        """
+        self.config_msg()
 
     def config_msg(self):
         self.part2 = MIMEText(self.html, 'html')
@@ -60,3 +87,6 @@ class sendEmail:
         self.register_msgBody()
         self.send_MSG()
 
+    def sendOtp(self, otp):
+        self.registerOtpBody(otp)
+        self.send_MSG()
