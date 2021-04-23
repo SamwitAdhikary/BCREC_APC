@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 from .send_email import sendEmail
-from .models import Contact, UserProfileInfo, User
+from .models import Contact, UserProfileInfo, User, YoutubeVideos
 from courses.models import Course
 
 
@@ -25,6 +25,8 @@ def checkUser(username):
 
 def index(request):
     allCourses = Course.objects.all()
+    youtube_videos = YoutubeVideos.objects.all()
+    print(youtube_videos)
 
     if request.method == "POST":
         name = request.POST.get("name")
@@ -59,8 +61,8 @@ def index(request):
 
     context = {
         'allcourses': allCourses,
-        'yt_videos': get_data('https://api.npoint.io/1e3ad07b9c9b7fcf4f20'),
-        'developers': get_data('https://api.npoint.io/952ccba723fbe7772407')
+        'yt_videos': youtube_videos,
+        # 'developers': get_data('https://api.npoint.io/952ccba723fbe7772407')
 
     }
 

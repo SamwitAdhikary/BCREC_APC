@@ -1,5 +1,7 @@
 {% extends "basic.html" %}
 
+{% load static %}
+
 {% block banner %}
 
 <!-- ================ start banner Area ================= -->
@@ -97,7 +99,7 @@
       {% for course in allcourses %}
       <div class="single-popular-course">
         <div class="thumb">
-          <img style="width: 300px; height: 260px;" class="f-img img-fluid mx-auto" src="{{ course.img_url }}"
+          <img style="width: 300px; height: 260px;" class="f-img img-fluid mx-auto" src="/media/{{ course.image }}"
             alt="" />
         </div>
         <div class="details">
@@ -141,7 +143,7 @@
           {% for video in yt_videos %}
           <div class="single-video">
             <div class="video-part">
-              <img class="img-fluid" src="{{ video.imgUrl }}" alt="">
+              <img class="img-fluid" src="/media/{{video.image}}" alt="">
               <div class="overlay"></div>
               <a class="popup-youtube play-btn" href="{{ video.link }}">
                 <img class="play-icon" src="/static/img/play-btn.png" alt="">

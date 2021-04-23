@@ -58,3 +58,12 @@ class UserProfileInfo(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class YoutubeVideos(models.Model):
+    desc = models.CharField(max_length=100, default="")
+    link = models.URLField(default="")
+    title = models.CharField(max_length=50, default="")
+    image = models.ImageField(upload_to="youtube", default="")
+
+    def __str__(self):
+        return self.title
