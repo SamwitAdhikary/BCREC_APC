@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from .send_email import sendEmail
 from .models import Contact, UserProfileInfo, User, YoutubeVideos, Developers
 from courses.models import Course
+from django.contrib import messages
 
 # CONSTANTS
 OTP = None
@@ -53,7 +54,8 @@ def index(request):
                     return HttpResponse("Account is not activated !")
             else:
                 print(f"Failed login, user-{name}, password-{password}")
-                return HttpResponse("Wrong Credentials !")
+                messages.error(request, 'Wrong Credentials!!')
+                
     context = {
         'allcourses': allCourses,
         'yt_videos': youtube_videos,
@@ -102,7 +104,7 @@ def secret_page(request):
 
 
 def about(request):
-    return HttpResponse("This is about page")
+    return render(request, 'home/about.html')
 
 
 def contact(request):
@@ -124,3 +126,24 @@ def contact(request):
         # send_mail.send()
 
     return render(request, 'home/contact.html')
+
+def overview(request):
+    return HttpResponse("This is overview page")
+
+def mission_and_vision(request):
+    return HttpResponse("This is mission page")
+
+def general_secretary_message(request):
+    return HttpResponse('This is secretary message page')
+
+def principal_message(request):
+    return HttpResponse('This is principal message')
+
+def approval_affiliation(request):
+    return HttpResponse("This is approval message")
+
+def collaboration(request):
+    return HttpResponse('This is collaboration')
+
+def committees(request):
+    return HttpResponse('This is committees')
