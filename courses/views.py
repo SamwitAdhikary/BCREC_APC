@@ -12,4 +12,7 @@ def courses(request):
     return render(request, 'courses/courses.html', context)
 
 def courses_post(request, slug):
-    return HttpResponse(f'This is course for {slug}')
+    # return HttpResponse(f'This is course for {slug}')
+    course = Course.objects.filter(slug=slug).first()
+    context = {'course': course}
+    return render(request, 'courses/courses-details.html', context)

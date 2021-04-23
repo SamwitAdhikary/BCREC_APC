@@ -1,5 +1,7 @@
 {% extends "basic.html" %}
 
+{% block title %} BCRECAPC | Courses {% endblock title %}
+
 {% block banner %}
 
   <!-- ================ start banner Area ================= -->
@@ -101,7 +103,7 @@
             <div class="d-flex justify-content-between mb-20">
               <p class="name">{{ course.description }}</p>
             </div>
-            <a href="/courses/{{course.slug}}">
+            <a href="{{course.slug}}">
               <h4>{{ course.title }}</h4>
             </a>
           </div>

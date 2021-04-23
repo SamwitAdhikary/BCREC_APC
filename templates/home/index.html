@@ -1,5 +1,7 @@
 {% extends "basic.html" %}
 
+{% block title %} BCRECAPC | Home {% endblock title %}
+
 {% load static %}
 
 {% block banner %}
@@ -283,7 +285,7 @@
         </div>
 
         <div class="offset-lg-1 col-lg-6">
-          <img src="{{ dev.imgUrl }}" alt="" />
+          <img src="/media/{{ dev.image }}" alt="" />
         </div>
       </div>
       {% endfor %}
