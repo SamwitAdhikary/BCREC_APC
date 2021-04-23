@@ -35,42 +35,50 @@
 <!-- ================ Start contact-page Area  ================= -->
 <section class="contact-page-area section-gap">
     <div class="container">
-        <p>Facing any difficulties in LOGIN, feel free <a href="/contact">conact</a> with us.</p>
-        <form class="form-area contact-form text-right" method="post">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-lg-6 form-group">
-                    <input name="username" id="username" placeholder="Username" class="common-input mb-20 form-control"
-                        type="text" required>
-                    <input name="password" id="password" placeholder="Password" class="common-input mb-20 form-control"
-                        type="password" required>
-                    <p>
-                        Show Password <span toggle="#password" class="fa fa-fw field-icon toggle-password fa-eye-slash"> </span>
-                    </p>
-                    <div style="text-align: center;">
-                        {% if messages %}
-                        {% for message in messages %}
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{message|safe }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {% if not user.is_authenticated %}
+            <p>Facing any difficulties in LOGIN, feel free <a href="/contact">conact</a> with us.</p>
+            <form class="form-area contact-form text-right" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6 form-group">
+                        <input name="username" id="username" placeholder="Username"
+                            class="common-input mb-20 form-control" type="text" required>
+                        <input name="password" id="password" placeholder="Password"
+                            class="common-input mb-20 form-control" type="password" required>
+                        <p>
+                            Show Password <span toggle="#password"
+                                class="fa fa-fw field-icon toggle-password fa-eye-slash"> </span>
+                        </p>
+                        <div style="text-align: center;">
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{message|safe }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
                         </div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="col-lg-12" style="margin-bottom: 1rem;">
+                        <div class="col-lg-12" style="margin-bottom: 1rem;">
                             <a href="">FORGOT PASSWORD ? (added soon!) </a>
                         </div>
-                    <div class="col-lg-12">
-                        <div class="alert-msg" style="text-align: left;"></div>
-                        <button class="btn" style="float: right;">LOGIN !</button>
+                        <div class="col-lg-12">
+                            <div class="alert-msg" style="text-align: left;"></div>
+                            <button class="btn" style="float: right;">LOGIN !</button>
+                        </div>
                     </div>
                 </div>
+            </form>
+            <div>
+                <p>Don't have an account ?</p>
+                <a class="text-black" href="/#Registration-Section">Register Here</a>
             </div>
-        </form>
-        <div>
-            <p>Don't have an account ?</p>
-            <a class="text-black" href="/#Registration-Section">Register Here</a>
-        </div>
+        {% else %}
+            <p style="letter-spacing: 5px; font-size: 3rem;">{{user|upper}} </p>
+            <p style="font-weight: 600; font-size: 2rem;">You Are Already Login !</p>
+            <p>If you want to logout, click <a href="/logout">here</a></p>
+        {% endif %}
     </div>
 </section>
 <!-- ================ End contact-page Area ================= -->
