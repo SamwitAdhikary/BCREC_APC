@@ -13,6 +13,8 @@ from .models import Contact, UserProfileInfo, User, YoutubeVideos, Developers
 from courses.models import Course
 from django.contrib import messages
 
+from .forms import CreateUserFrom
+
 # CONSTANTS
 OTP = None
 
@@ -30,36 +32,27 @@ def checkUser(username):
 
 
 def index(request):
-    allCourses = Course.objects.all()
-    youtube_videos = YoutubeVideos.objects.all()
-    developers = Developers.objects.all()
+    form = CreateUserFrom()
 
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        phNo = request.POST.get("phone")
-
-        if email:
-            if checkUser(name):
-                return HttpResponse("You already have an account, Kindly Login IN !!")
-            return verify_otp(request, email, name, make_password(password), phNo)
-        else:
-            user = authenticate(username=name, password=password)
-            if user:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponseRedirect(reverse('HomePage'))
-                else:
-                    return HttpResponse("Account is not activated !")
+        form = CreateUserFrom(request.POST)
+        if not checkUser(form.data['username']):
+            print(form.is_valid())
+            if form.is_valid():
+                user = form.save(); user.save()
+                user_detils = UserProfileInfo(user=user)
+                user_detils.save(); login(request, user)
             else:
-                print(f"Failed login, user-{name}, password-{password}")
-                messages.error(request, 'Wrong Credentials!!')
-                
+                if form.data['password1'] != form.data['password2']:
+                    messages.error(request, 'Password Mismatched !')
+                else:
+                    messages.error(request, 'Password is too Easy to guess.')
+        else:
+            messages.error(request, "Sorry this username is not avaliable, please choose another one.")
+
     context = {
-        'allcourses': allCourses,
-        'yt_videos': youtube_videos,
-        'developers': developers
+        'allcourses': Course.objects.all(), 'yt_videos': YoutubeVideos.objects.all(), 'developers': Developers.objects.all(),
+        'form': form
     }
     return render(request, 'home/index.html', context)
 
@@ -127,23 +120,41 @@ def contact(request):
 
     return render(request, 'home/contact.html')
 
+
 def overview(request):
     return HttpResponse("This is overview page")
+
 
 def mission_and_vision(request):
     return HttpResponse("This is mission page")
 
+
 def general_secretary_message(request):
     return HttpResponse('This is secretary message page')
+
 
 def principal_message(request):
     return HttpResponse('This is principal message')
 
+
 def approval_affiliation(request):
     return HttpResponse("This is approval message")
+
 
 def collaboration(request):
     return HttpResponse('This is collaboration')
 
+
 def committees(request):
     return HttpResponse('This is committees')
+
+def loginUser(request):
+    if request.method == "POST":
+        user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
+        if user and user.is_active:
+            login(request, user)
+            return HttpResponseRedirect(reverse('HomePage'))
+        else:
+            messages.error(request, 'Wrong Credentials!!')
+    
+    return render(request, 'home/login.html')

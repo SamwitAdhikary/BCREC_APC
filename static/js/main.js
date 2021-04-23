@@ -261,30 +261,9 @@ $(function() {
 	});
 });
 
-
-// Toggle Registration - Login Form
-function toggleForm() {
-	form_div = document.getElementById("login").childNodes;
-
-	if (form_div[3].innerHTML == "Register") {
-		document.getElementById("email").style.display = "inline";
-		document.getElementById("phNo").style.display = "inline";
-		document.getElementById("formType").innerHTML = "Register";
-		document.getElementById("toogleBtn").innerHTML = "Register";
-		document.getElementById("email").required = true;
-		document.getElementById("phNo").required = true;
-
-		form_div[1].innerHTML = "Already Have an account ?"
-		form_div[3].innerHTML = "Login Here"
-	} else {
-		document.getElementById("email").style.display = "none";
-		document.getElementById("phNo").style.display = "none";
-		document.getElementById("formType").innerHTML = "Login";
-		document.getElementById("toogleBtn").innerHTML = "Login";
-		document.getElementById("email").required = false;
-		document.getElementById("phNo").required = false;
-
-		form_div[1].innerHTML = "Create a new Account";
-		form_div[3].innerHTML = "Register";
-	}
-}
+// Js for Registration form
+$("#id_email ,#id_username ,#id_password1 ,#id_password2").addClass('form-control')
+$("#id_username").attr('placeholder', "User name")
+$("#id_email").attr('placeholder', "Email Address")
+$("#id_password1").attr('placeholder', "Password")
+$("#id_password2").attr('placeholder', "Confirm Password")

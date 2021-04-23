@@ -43,10 +43,11 @@ Sem_CHOICES = (
 
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.BigIntegerField(blank=True)
+    phone_number = models.BigIntegerField(blank=True, null=True)
 
     # additional
     protfolio_site = models.URLField(blank=True)
+    
     # install pillow lib, if you want to work with images.
     profile_pic = models.ImageField(upload_to='pofile_pics', blank=True)
 
