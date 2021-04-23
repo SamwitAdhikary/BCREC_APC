@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime
 
 # Create your models here.
 
@@ -10,7 +9,7 @@ class Contact(models.Model):
     email = models.EmailField()
     phone_number = models.BigIntegerField()
     message = models.TextField()
-    dateTime = models.DateTimeField(auto_created=True, default=datetime.now())
+    # dateTime = models.DateTimeField(auto_created=True, default=datetime.now())
 
     def __str__(self):
         return "Message from: " + self.name

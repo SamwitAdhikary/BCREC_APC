@@ -91,10 +91,11 @@
       </div>
     </div>
     <div class="owl-carousel popuar-course-carusel">
+      {% load static %}
       {% for course in allcourses %}
         <div class="single-popular-course">
           <div class="thumb">
-            <img style="width: 300px; height: 260px;" class="f-img img-fluid mx-auto" src="{{ course.img_url }}" alt="" />
+            <img style="width: 300px; height: 260px;" class="f-img img-fluid mx-auto" src="/media/{{course.image}}" alt="" />
           </div>
           <div class="details">
             <div class="d-flex justify-content-between mb-20">
