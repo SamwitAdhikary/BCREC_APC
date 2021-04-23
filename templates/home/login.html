@@ -44,6 +44,9 @@
                         type="text" required>
                     <input name="password" id="password" placeholder="Password" class="common-input mb-20 form-control"
                         type="password" required>
+                    <p>
+                        Show Password <span toggle="#password" class="fa fa-fw field-icon toggle-password fa-eye-slash"> </span>
+                    </p>
                     <div style="text-align: center;">
                         {% if messages %}
                         {% for message in messages %}
