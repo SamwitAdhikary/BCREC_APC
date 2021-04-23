@@ -84,19 +84,18 @@
               </div>
             </li>
             <li><a href="/contact">Contacts</a></li>
-            <!-- {% if user.is_authenticated %}
-            <li><a href="/">Profile</a></li>
-            <li><a href="/logout">logout</a></li>
-            {% endif %} -->
             {% if user.is_authenticated %}
             <li class="dropdown">
               <a class="dropdown-toggle" href="#" data-toggle="dropdown">
                 Profile
               </a>
               <div class="dropdown-menu">
+                <a class="dropdown-item" href="/profile">Profile</a>
                 <a class="dropdown-item" href="/logout">Logout</a>
               </div>
             </li>
+            {% else %} 
+              <li><a href="/login">Login</a></li>
             {% endif %}
           </ul>
         </div>
