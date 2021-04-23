@@ -67,3 +67,13 @@ class YoutubeVideos(models.Model):
 
     def __str__(self):
         return self.title
+
+class Developers(models.Model):
+    desc = models.TextField(default="")
+    name = models.CharField(max_length=50, default="")
+    image = models.ImageField(upload_to="developer", default="")
+    nick_name = models.CharField(max_length=50, default="")
+
+    def __str__(self):
+        return self.name
+
