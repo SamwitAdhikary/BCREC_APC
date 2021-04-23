@@ -326,7 +326,7 @@
             </div>
             <div class="form-group col-md-12">
               <input type="tel" class="form-control" id="phNo" name="phone" placeholder="Phone Number"
-                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone Number'">
+                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone Number'" required>
             </div>
             <div class="form-group col-md-12">
               <input type="email" class="form-control" id="email" name="email" placeholder="Email Address"
@@ -344,6 +344,14 @@
             <p>Already have an account ?</p>
             <a onclick="toggleForm()" class="text-black" href="#Registration-Section">Login Here</a>
           </div>
+          {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
     </div>

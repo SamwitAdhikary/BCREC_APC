@@ -267,21 +267,25 @@ function toggleForm() {
 	form_div = document.getElementById("login").childNodes;
 
 	if (form_div[3].innerHTML == "Register") {
+
+		console.log('if');
 		document.getElementById("email").style.display = "inline";
 		document.getElementById("phNo").style.display = "inline";
 		document.getElementById("formType").innerHTML = "Register";
 		document.getElementById("toogleBtn").innerHTML = "Register";
 		document.getElementById("email").required = true;
+		document.getElementById("phNo").required = true;
 
 		form_div[1].innerHTML = "Already Have an account ?"
 		form_div[3].innerHTML = "Login Here"
 	} else {
+		console.log('else');
 		document.getElementById("email").style.display = "none";
 		document.getElementById("phNo").style.display = "none";
 		document.getElementById("formType").innerHTML = "Login";
 		document.getElementById("toogleBtn").innerHTML = "Login";
 		document.getElementById("email").required = false;
-
+		document.getElementById("phNo").required = false;
 
 		form_div[1].innerHTML = "Create a new Account";
 		form_div[3].innerHTML = "Register";
