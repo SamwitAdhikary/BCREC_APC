@@ -4,57 +4,66 @@
 
 {% block banner %}
 
-    <!-- ================ start banner Area ================= -->
-    <section class="banner-area">
-        <div class="container">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-lg-12 banner-right">
-                    <h1 class="text-white">
-                        {{course.title}}
-                    </h1>
-                    <p class="mx-auto text-white  mt-20 mb-40">
-                        {{ course.description }} <br>
-                        {{ course.yearsOfCourse }} years of course.
-                    </p>
-                    <div class="link-nav">
-                        <span class="box">
-                            <a href="/">Home </a>
-                            <i class="lnr lnr-arrow-right"></i>
-                            <a href="/courses">Courses </a>
-                            <i class="lnr lnr-arrow-right"></i>
-                            <a href="/course-detail">{{course.title }}</a>
-                        </span>
-                    </div>
+<!-- ================ start banner Area ================= -->
+<section class="banner-area">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-12 banner-right">
+                <h1 class="text-white">
+                    {{course.title}}
+                </h1>
+                <p class="mx-auto text-white  mt-20 mb-40">
+                    {{ course.description }} <br>
+                    {{ course.yearsOfCourse }} years of course.
+                </p>
+                <div class="link-nav">
+                    <span class="box">
+                        <a href="/">Home </a>
+                        <i class="lnr lnr-arrow-right"></i>
+                        <a href="/courses">Courses </a>
+                        <i class="lnr lnr-arrow-right"></i>
+                        <a href="/courses/{{course.slug}}">{{course.title }}</a>
+                    </span>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- ================ End banner Area ================= -->
+    </div>
+</section>
+<!-- ================ End banner Area ================= -->
 
 {% endblock banner %}
 
 {% block body %}
 
-    <!--================ Start Course Details Area =================-->
-    <section class="course-details-area section-gap">
-        <div class="container">
-            <h4 class="title">{{course.title}} Semesters</h4>
-            <div class="content">
-                <ul class="course-list">
-                    {% with ''|center:sem as range %}
-                        {% for _ in range %}
-                            <li class="justify-content-between d-flex">
-                                <a href="{{course.slug}}/{{forloop.counter}}">
-                                    <h4>Semester - {{ forloop.counter }}</h4>
-                                </a>
-                                <a class="btn text-uppercase" href="{{course.slug}}/{{forloop.counter}}">VIew
-                                    Papers</a>
-                            </li>
-                        {% endfor %}
-                    {% endwith %}
-                </ul>
-            </div>
-    </section>
-    <!--================ End Course Details Area =================-->
+<!--================ Start Course Details Area =================-->
+<section class="course-details-area section-gap">
+    <div class="container">
+        <h4 class="title">{{course.title}} Semesters</h4>
+        <div class="content">
+            <ul class="course-list">
+                {% with ''|center:sem as range %}
+                {% for _ in range %}
+                <li class="justify-content-between d-flex">
+                    <a href="{{course.slug}}/{{forloop.counter}}">
+                        <h4>Semester - {{ forloop.counter }}</h4>
+                    </a>
+                    <a class="btn text-uppercase link" href="{{course.slug}}/{{forloop.counter}}">VIew
+                        Papers</a>
+                </li>
+                {% endfor %}
+                {% endwith %}
+            </ul>
+            <hr>
+            <ul class="course-list">
+                <li class="justify-content-between d-flex">
+                    <a href="">
+                        <h4>Syllabus</h4>
+                    </a>
+                    <a class="btn text-uppercase link" href="">Download</a>
+                </li>
+            </ul>
+        </div>
+</section>
+<!--================ End Course Details Area =================-->
 
 {% endblock body %}
