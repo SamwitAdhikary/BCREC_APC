@@ -90,7 +90,9 @@ def verify_otp(request, email, name, password, phNo):
 
 @login_required(login_url='/login/')
 def profile(request):
-    return HttpResponse("Profile")
+    return render(request, 'home/profile.html', {
+        'profile': UserProfileInfo.objects.filter(user=request.user).first()
+    })
 
 
 @login_required(login_url='/login/')
