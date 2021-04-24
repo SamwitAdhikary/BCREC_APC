@@ -267,3 +267,16 @@ $("#id_username").attr('placeholder', "User name")
 $("#id_email").attr('placeholder', "Email Address")
 $("#id_password1").attr('placeholder', "Password")
 $("#id_password2").attr('placeholder', "Confirm Password")
+
+// Toggle Password (show -- Hide)
+
+// For show and hide password
+$(".toggle-password").click(function () {
+	$(this).toggleClass("fa-eye-slash fa-eye");
+	var input = $($(this).attr("toggle"));
+	if (input.attr("type") == "password") {
+		input.attr("type", "text");
+	} else {
+		input.attr("type", "password");
+	}
+});
