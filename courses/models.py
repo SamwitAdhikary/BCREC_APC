@@ -20,7 +20,7 @@ class Semester(models.Model):
     course = models.ForeignKey(Course, null=True, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.title
+        return f"{self.title} - {self.course.slug}"
 
 
 class Paper(models.Model):
