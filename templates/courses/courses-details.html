@@ -1,6 +1,6 @@
 {% extends "basic.html" %}
 
-{% block title %} BCRECAPC | {{course.title}} {% endblock title %}
+{% block title %} BCRECAPC | COURSE | {{course.title}} {% endblock title %}
 
 {% block banner %}
 
@@ -13,8 +13,8 @@
                         {{course.title}}
                     </h1>
                     <p class="mx-auto text-white  mt-20 mb-40">
-                        In the history of modern astronomy, there is probably no one greater leap forward than the
-                        building.
+                        {{ course.description }} <br>
+                        {{ course.yearsOfCourse }} years of course.
                     </p>
                     <div class="link-nav">
                         <span class="box">
@@ -22,7 +22,7 @@
                             <i class="lnr lnr-arrow-right"></i>
                             <a href="/courses">Courses </a>
                             <i class="lnr lnr-arrow-right"></i>
-                            <a href="/course-detail">Course Details</a>
+                            <a href="/course-detail">{{course.title }}</a>
                         </span>
                     </div>
                 </div>
