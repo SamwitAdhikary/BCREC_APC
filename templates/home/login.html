@@ -36,7 +36,7 @@
 <section class="contact-page-area section-gap">
     <div class="container">
         {% if not user.is_authenticated %}
-            <p>Facing any difficulties in LOGIN, feel free <a href="/contact">conact</a> with us.</p>
+            <p>Facing any difficulties in LOGIN, feel free <a href="/contact">contact</a> with us.</p>
             <form class="form-area contact-form text-right" method="post">
                 {% csrf_token %}
                 <div class="row">
