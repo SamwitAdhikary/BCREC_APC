@@ -1,6 +1,7 @@
 from django import http
 from django.shortcuts import render, HttpResponse
 from .models import Course, Paper, Year
+from home.models import User, UserProfileInfo
 
 # Create your views here.
 
@@ -16,7 +17,7 @@ def courses(request):
 
 def courses_post(request, slug):
     course = Course.objects.filter(slug=slug).first()
-    context = {'course': course, 'sem':course.yearsOfCourse * 2}
+    context = {'course': course, 'sem': course.yearsOfCourse * 2}
     return render(request, 'courses/courses-details.html', context)
 
 
@@ -30,7 +31,9 @@ def show_papers(request, slug, sem):
 def display_papers(request, slug, semester, paperCode):
     paper_name = Paper.objects.filter(
         course=slug, semester=semester, paper_code=paperCode).first()
-    avaliableYears = Year.objects.filter(paper_name=paper_name, course=slug).all()
+    avaliableYears = Year.objects.filter(
+        paper_name=paper_name, course=slug).all()
+    user = User.objects.filter(username=request.user).first()
     return render(request, 'courses/displayyear.html', {
-        'papers': avaliableYears
+        'papers': avaliableYears, 'profile': UserProfileInfo.objects.filter(user=user).first() if user else {}
     })

@@ -45,6 +45,7 @@ Sem_CHOICES = (
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_verify = models.BooleanField(default=False)
+    is_bcrecian = models.BooleanField(default=False)
     autogen_otp = models.IntegerField()
     name = models.CharField(max_length=20, blank=True)
     phone_number = models.CharField(
