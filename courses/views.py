@@ -21,20 +21,22 @@ def courses_post(request, slug):
 
 
 def show_papers(request, slug, sem):
-    print(slug, sem)
     papers = Paper.objects.filter(course=slug, semester=sem).all()
     return render(request, 'courses/papers.html', {
         'papers': papers
     })
 
-def display_papers(request, slug, semester, slugshow):
-    papers = Paper.objects.filter(course=slug, semester=semester, paperslug=slugshow).all()
-    year = Year.objects.all()
-    print(papers)
-    return render(request, 'courses/displayyear.html', {'papers': papers, 'years': year})
 
-def get_year(request, slug, sem, slugshow, year):
-    paper = Paper.objects.filter(course=slug, paper_name=sem, paperslug=slugshow, year=year).all()
-    # print(years)
-    years = Year.objects.all()
-    return render(request, 'courses/year.html', {'year': years, 'paper':paper})
+def display_papers(request, slug, semester, paperCode):
+    paper_name = Paper.objects.filter(
+        course=slug, semester=semester, paper_code=paperCode).first()
+    avaliableYears = Year.objects.filter(paper_name=paper_name, course=slug).all()
+    return render(request, 'courses/displayyear.html', {
+        'papers': avaliableYears
+    })
+
+# def get_year(request, slug, sem, slugshow, year):
+#     paper = Paper.objects.filter(course=slug, paper_name=sem, paperslug=slugshow, year=year).all()
+#     # print(years)
+#     years = Year.objects.all()
+#     return render(request, 'courses/year.html', {'year': years, 'paper':paper})
