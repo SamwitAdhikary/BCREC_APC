@@ -28,7 +28,7 @@ def add_paper():
             print(paper_codes[j].getText())
             paper = Paper.objects.get_or_create(
                 paper_name=paper_names[j].getText(), paper_code=paper_codes[j].getText(), semester=i, course=select_course())[0]
-            # paper.save() uncommant for save to DB
+            # paper.save() uncomment for save to DB
             
 
 if __name__ == "__main__":

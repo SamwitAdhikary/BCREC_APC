@@ -16,6 +16,7 @@ class Course(models.Model):
 
 
 class Paper(models.Model):
+    paperslug = models.CharField(max_length=50, default="")
     paper_name = models.CharField(max_length=100)
     paper_code = models.CharField(max_length=100, null=True)
     semester = models.IntegerField()
@@ -26,4 +27,8 @@ class Paper(models.Model):
 
 class Year(models.Model):
     year = models.IntegerField(default=0)
-    
+    paper_name = models.ForeignKey(Paper, null=True, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.year} - {self.paper_name}'
