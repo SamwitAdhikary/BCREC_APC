@@ -36,10 +36,19 @@
 {% block body %}
 
 <!--================ Start Course Details Area =================-->
-<section class="course-details-area section-gap">
+<section class="course-details-area">
+    <div class="container">
+        <h4 class="title">{{course.description}}</h4>
+        <div class="content">
+            {{course.about_course|safe}}
+        </div>
+</section>
+
+<section class="course-details-area">
     <div class="container">
         <h4 class="title">{{course.title}} Semesters</h4>
         <div class="content">
+            {% if user.is_authenticated %}
             <ul class="course-list">
                 {% with ''|center:sem as range %}
                 {% for _ in range %}
@@ -47,13 +56,14 @@
                     <a href="{{forloop.counter}}/">
                         <h4>Semester - {{ forloop.counter }}</h4>
                     </a>
-                    <a class="btn text-uppercase link" href="{{course.slug}}/{{forloop.counter}}">VIew
+                    <a class="btn text-uppercase link" href="{{forloop.counter}}">VIew
                         Papers</a>
                 </li>
                 {% endfor %}
                 {% endwith %}
             </ul>
             <hr>
+            {% endif %}
             <ul class="course-list">
                 <li class="justify-content-between d-flex">
                     <a href="">
@@ -64,6 +74,7 @@
             </ul>
         </div>
 </section>
+
 <!--================ End Course Details Area =================-->
 
 {% endblock body %}

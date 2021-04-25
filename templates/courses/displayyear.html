@@ -48,10 +48,10 @@
             <ul class="course-list">
                 {% for year in papers %}
                 <li class="justify-content-between d-flex">
-                    <a href="/media/{{year.upload_paper}}">
+                    <a href="#" target="_blank">
                         <h4>{{ year.year }}</h4>
                     </a>
-                    <a class="btn text-uppercase" href="/media/{{year.upload_paper}}">Download</a>
+                    <a class="btn text-uppercase" href="/media/{{year.upload_paper}}" target="_blank">Download</a>
                 </li>
                 {% endfor %}
             </ul>
