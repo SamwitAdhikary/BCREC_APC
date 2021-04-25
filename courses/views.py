@@ -34,9 +34,3 @@ def display_papers(request, slug, semester, paperCode):
     return render(request, 'courses/displayyear.html', {
         'papers': avaliableYears
     })
-
-# def get_year(request, slug, sem, slugshow, year):
-#     paper = Paper.objects.filter(course=slug, paper_name=sem, paperslug=slugshow, year=year).all()
-#     # print(years)
-#     years = Year.objects.all()
-#     return render(request, 'courses/year.html', {'year': years, 'paper':paper})
