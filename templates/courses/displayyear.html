@@ -1,6 +1,7 @@
 {% extends "basic.html" %}
 
-{% block title %} BCRECAPC | Course | {{papers.0.course.title}} | {{ papers.0.semester }} {% endblock title %}
+{% block title %} BCRECAPC | Course | {{papers.0.course.title}} | {{ papers.0.semester }}  {{papers.0.paper_name }}
+{% endblock title %}
 
 {% block banner %}
 
