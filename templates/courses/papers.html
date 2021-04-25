@@ -45,10 +45,10 @@
             <ul class="course-list">
                 {% for paper in papers %}
                 <li class="justify-content-between d-flex">
-                    <a href="{{paper.paperslug}}">
+                    <a href="{{paper.paper_code}}/">
                         <h4>{{ paper.paper_name }}</h4>
                     </a>
-                    <a class="btn text-uppercase" href="">{{ paper.paper_code }}</a>
+                    <a class="btn text-uppercase" href="{{paper.paper_code}}">{{ paper.paper_code }}</a>
                 </li>
                 {% endfor %}
             </ul>

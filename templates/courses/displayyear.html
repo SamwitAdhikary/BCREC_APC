@@ -1,6 +1,7 @@
 {% extends "basic.html" %}
 
-{% block title %} BCRECAPC | Course | {{papers.0.course.title}} | {{ papers.0.semester }} {% endblock title %}
+{% block title %} BCRECAPC | Course | {{papers.0.course.title}} | {{ papers.0.semester }}  {{papers.0.paper_name }}
+{% endblock title %}
 
 {% block banner %}
 
@@ -10,11 +11,10 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-12 banner-right">
                 <h1 class="text-white">
-                    {{papers.0.course.title }} Sem {{ papers.0.semester }}
+                    {{papers.0.paper_name }}
                 </h1>
                 <p class="mx-auto text-white  mt-20 mb-40">
-                    {{ papers.0.course.description }}, <br>
-                    Sem {{ papers.0.semester }} semester has {{ papers|length }} papers.
+                    {{ papers|length }} years of Paper found.
                 </p> 
                 <div class="link-nav">
                     <span class="box">
@@ -24,7 +24,10 @@
                         <i class="lnr lnr-arrow-right"></i>
                         <a href="/courses/{{papers.0.course.slug}}">{{ papers.0.course.title }}</a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="">Sem {{ papers.0.semester }}</a>
+                        <a href="/courses/{{papers.0.course.slug}}/{{ papers.0.paper_name.semester }}">Sem
+                            {{ papers.0.paper_name.semester }}</a>
+                        <i class="lnr lnr-arrow-right"></i>
+                        <a href="">{{papers.0.paper_name }}</a>
                     </span>
                 </div>
             </div>
@@ -43,12 +46,12 @@
         <h4 class="title">{{papers.0.paper_name }}</h4>
         <div class="content">
             <ul class="course-list">
-                {% for year in years %}
+                {% for year in papers %}
                 <li class="justify-content-between d-flex">
-                    <a href="{{year.year}}">
+                    <a href="#" target="_blank">
                         <h4>{{ year.year }}</h4>
                     </a>
-                    <a class="btn text-uppercase" href="{{year.year}}">{{ paper.paper_code }}</a>
+                    <a class="btn text-uppercase" href="/media/{{year.upload_paper}}" target="_blank">Download</a>
                 </li>
                 {% endfor %}
             </ul>
