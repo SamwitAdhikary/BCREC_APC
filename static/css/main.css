@@ -129,12 +129,12 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   color: #222222;
   line-height: 1.2em;
   margin-bottom: 0;
   margin-top: 0;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .h1,
@@ -145,7 +145,7 @@ h6 {
 .h6 {
   margin-bottom: 0;
   margin-top: 0;
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 900;
   color: #222222;
 }
