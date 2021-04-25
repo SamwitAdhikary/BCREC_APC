@@ -40,7 +40,8 @@ def index(request):
             if form.is_valid():
                 user = form.save()
                 user.save()
-                user_detils = UserProfileInfo(user=user)
+                user_detils = UserProfileInfo(
+                    user=user, autogen_otp=randint(100000, 999999))
                 user_detils.save()
                 login(request, user)
             else:
@@ -59,32 +60,35 @@ def index(request):
     return render(request, 'home/index.html', context)
 
 
-def verify_otp(request, email, name, password, phNo):
-    global OTP
-    if request.method == "POST":
-        if not OTP:
-            OTP = randint(1111, 9999)
-            print(OTP)
-            # send_mail = sendEmail(user_name=name,user_email=email)
-            # send_mail.sendOtp(otp=OTP)
-        else:
-            user_otp = request.POST.get('otp')
-            if user_otp and int(user_otp) == OTP:
-                OTP = None
-                user = User(username=name, password=password, email=email)
-                user.save()
-                if phNo:
-                    user_details = UserProfileInfo(
-                        user=user, phone_number=phNo)
-                    user_details.save()
-                login(request, user)
-                return redirect('HomePage')
-            OTP = None
-            return HttpResponse("Wrong OTP, Try again ! <a href='/'>Back to Home</a>")
+@login_required
+def verify_user(request):
+    user = request.user
+    user_info = UserProfileInfo.objects.filter(user=user).first()
+    sendLink = sendEmail(user_name=user, user_email=user.email)
+    sendLink.sendOtp(
+        f"http://127.0.0.1:8000/verify-otp/{user}/{user.email}/{user_info.autogen_otp}/{user.password}/")
+    return render(request, 'home/verify.html', {
+    })
 
-        return render(request, 'home/verify-otp.html', {
-            'email': email, 'username': name, 'password': password, 'phNo': phNo
-        })
+
+def verify_otp(request, username, email, password, otp):
+    user = User.objects.filter(username=username).first()
+
+    if user and user.email == email:
+        userInfo = UserProfileInfo.objects.filter(user=user).first()
+        if not userInfo.is_verify:
+            if userInfo.autogen_otp == otp:
+                UserProfileInfo.objects.filter(
+                    user=user).update(is_verify=True)  # update to verify
+                return render(request, 'home/success.html', {
+                    'msg': 'Your account is verified successfully, Now you can use all the features.'
+                })
+        else:
+            return render(request, 'home/success.html', {
+                'msg': 'Your account is already verified !! Now you can all the features.'
+            })
+
+    return HttpResponse("Invalid !!")
 
 
 @login_required(login_url='/login/')

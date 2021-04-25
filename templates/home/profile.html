@@ -404,9 +404,9 @@
 {% block body %}
 
 {% if not profile.is_verify %}
-    <div class="alert alert-warning warning" role="alert">
-        You account is not verified, <a href="">VERIFY</a> it to use all the features.
-    </div>
+<div class="alert alert-warning warning" role="alert">
+    You account is not verified, <a href="/verify-user">VERIFY</a> it to use all the features.
+</div>
 {% endif %}
 
 <div class="container">
@@ -507,10 +507,10 @@
                         personal datas like aadhar or votar card. you can upload anything and access that anytime you
                         want. <b>YOUR DATA IS 100% SECURE WITH US !</b></p>
                     {% if profile.portfolio_site %}
-                        <a target="_blank" href="{{profile.portfolio_site}}">Your Portfolio website</a><br>
+                    <a target="_blank" href="{{profile.portfolio_site}}">Your Portfolio website</a><br>
                     {% endif %}
                     {% if profile.upload_cv %}
-                        <a target="_blank" href="/media/{{profile.upload_cv}}">Download your CV</a>
+                    <a target="_blank" href="/media/{{profile.upload_cv}}">Download your CV</a>
                     {% endif %}
                 </div>
                 <div class="profile-settings tab">
