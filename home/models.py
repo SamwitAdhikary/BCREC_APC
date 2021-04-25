@@ -55,7 +55,7 @@ class UserProfileInfo(models.Model):
     profile_pic = models.ImageField(upload_to='pofile_pics', blank=True)
     course = models.CharField(
         max_length=10, choices=Course_CHOICES, default='BCA')
-    Semester = models.IntegerField(choices=Sem_CHOICES, default="one")
+    Semester = models.IntegerField(choices=Sem_CHOICES, default=1)
     bio = models.CharField(max_length=500, default="update your bio.")
     portfolio_site = models.URLField(blank=True, default="")
     upload_cv = models.FileField(upload_to="user_cvs", blank=True)
