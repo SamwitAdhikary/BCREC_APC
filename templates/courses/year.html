@@ -40,13 +40,13 @@
 <!--================ Start Course Details Area =================-->
 <section class="course-details-area section-gap">
     <div class="container">
-        <h4 class="title">{{papers.0.paper_name }}</h4>
+        <h4 class="title">{{year.0.year }}</h4>
         <div class="content">
             <ul class="course-list">
-                {% for year in years %}
+                {% for years in year %}
                 <li class="justify-content-between d-flex">
-                    <a href="{{year.year}}">
-                        <h4>{{ year.year }}</h4>
+                    <a href="/media/{{years.upload_paper}}">
+                        <h4>{{ years.upload_paper }}</h4>
                     </a>
                     <a class="btn text-uppercase" href="{{year.year}}">{{ paper.paper_code }}</a>
                 </li>

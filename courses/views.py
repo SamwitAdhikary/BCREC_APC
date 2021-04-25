@@ -34,6 +34,7 @@ def display_papers(request, slug, semester, slugshow):
     return render(request, 'courses/displayyear.html', {'papers': papers, 'years': year})
 
 def get_year(request, slug, sem, slugshow, year):
-    years = Year.objects.filter(course=slug, paper_name=sem, paperslug=slugshow, year=year).all()
-    print(years)
-    return render(request, 'courses/year.html', {'year': years})
+    paper = Paper.objects.filter(course=slug, paper_name=sem, paperslug=slugshow, year=year).all()
+    # print(years)
+    years = Year.objects.all()
+    return render(request, 'courses/year.html', {'year': years, 'paper':paper})
