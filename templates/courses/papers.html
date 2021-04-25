@@ -1,6 +1,6 @@
 {% extends "basic.html" %}
 
-{% block title %} BCRECAPC | {{course.title}} {% endblock title %}
+{% block title %} BCRECAPC | Course | {{papers.0.course.title}} | {{ papers.0.semester }} {% endblock title %}
 
 {% block banner %}
 
@@ -13,18 +13,18 @@
                     {{papers.0.course.title }} Sem {{ papers.0.semester }}
                 </h1>
                 <p class="mx-auto text-white  mt-20 mb-40">
-                    In the history of modern astronomy, there is probably no one greater leap forward than the
-                    building.
-                </p>
+                    {{ papers.0.course.description }}, <br>
+                    Sem {{ papers.0.semester }} semester has {{ papers|length }} papers.
+                </p> 
                 <div class="link-nav">
                     <span class="box">
                         <a href="/">Home </a>
                         <i class="lnr lnr-arrow-right"></i>
                         <a href="/courses">Courses </a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="{{course.slug}}">Course Details</a>
+                        <a href="/courses/{{papers.0.course.slug}}">{{ papers.0.course.title }}</a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="{{papers.sem}}">{{papers.0.course.title }} Sem {{ papers.0.semester }}</a>
+                        <a href="">Sem {{ papers.0.semester }}</a>
                     </span>
                 </div>
             </div>
