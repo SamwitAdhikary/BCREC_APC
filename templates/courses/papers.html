@@ -10,7 +10,7 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-12 banner-right">
                 <h1 class="text-white">
-                    {{course.title}}
+                    {{papers.0.course.title }} Sem {{ papers.0.semester }}
                 </h1>
                 <p class="mx-auto text-white  mt-20 mb-40">
                     In the history of modern astronomy, there is probably no one greater leap forward than the
@@ -22,7 +22,9 @@
                         <i class="lnr lnr-arrow-right"></i>
                         <a href="/courses">Courses </a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="/course-detail">Course Details</a>
+                        <a href="{{course.slug}}">Course Details</a>
+                        <i class="lnr lnr-arrow-right"></i>
+                        <a href="{{papers.sem}}">{{papers.0.course.title }} Sem {{ papers.0.semester }}</a>
                     </span>
                 </div>
             </div>
