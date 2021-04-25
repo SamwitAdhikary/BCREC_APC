@@ -39,16 +39,19 @@ def index(request):
         if not checkUser(form.data['username']):
             print(form.is_valid())
             if form.is_valid():
-                user = form.save(); user.save()
+                user = form.save()
+                user.save()
                 user_detils = UserProfileInfo(user=user)
-                user_detils.save(); login(request, user)
+                user_detils.save()
+                login(request, user)
             else:
                 if form.data['password1'] != form.data['password2']:
                     messages.error(request, 'Password Mismatched !')
                 else:
                     messages.error(request, 'Password is too Easy to guess.')
         else:
-            messages.error(request, "Sorry this username is not avaliable, please choose another one.")
+            messages.error(
+                request, "Sorry this username is not avaliable, please choose another one.")
 
     context = {
         'allcourses': Course.objects.all(), 'yt_videos': YoutubeVideos.objects.all(), 'developers': Developers.objects.all(),
@@ -85,15 +88,17 @@ def verify_otp(request, email, name, password, phNo):
         })
 
 
-@login_required
+@login_required(login_url='/login/')
+def profile(request):
+    return render(request, 'home/profile.html', {
+        'profile': UserProfileInfo.objects.filter(user=request.user).first()
+    })
+
+
+@login_required(login_url='/login/')
 def logoutUser(request):
     logout(request)
     return HttpResponseRedirect(reverse('HomePage'))
-
-
-@login_required
-def secret_page(request):
-    return HttpResponse("You're Logged In !")
 
 
 def about(request):
@@ -148,13 +153,15 @@ def collaboration(request):
 def committees(request):
     return HttpResponse('This is committees')
 
+
 def loginUser(request):
     if request.method == "POST":
-        user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
+        user = authenticate(username=request.POST.get(
+            'username'), password=request.POST.get('password'))
         if user and user.is_active:
             login(request, user)
             return HttpResponseRedirect(reverse('HomePage'))
         else:
             messages.error(request, 'Wrong Credentials!!')
-    
+
     return render(request, 'home/login.html')

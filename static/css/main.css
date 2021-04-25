@@ -4581,3 +4581,13 @@ h6 {
     color: #fff;
   }
 }
+
+.link {
+  color: cornflowerblue !important;
+}
+
+.warning {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+}
