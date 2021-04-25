@@ -22,9 +22,7 @@ def courses_post(request, slug):
 
 
 def show_papers(request, slug, sem):
-    print(slug, sem)
     papers = Paper.objects.filter(course=slug, semester=sem).all()
-    print(papers)
     return render(request, 'courses/papers.html', {
         'papers': papers
     })
