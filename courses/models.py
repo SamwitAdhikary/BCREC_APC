@@ -16,7 +16,6 @@ class Course(models.Model):
 
 
 class Paper(models.Model):
-    paperslug = models.CharField(max_length=50, default="")
     paper_name = models.CharField(max_length=100)
     paper_code = models.CharField(max_length=100, null=True)
     semester = models.IntegerField()
