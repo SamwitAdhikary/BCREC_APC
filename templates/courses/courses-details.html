@@ -44,7 +44,7 @@
                 {% with ''|center:sem as range %}
                 {% for _ in range %}
                 <li class="justify-content-between d-flex">
-                    <a href="{{course.slug}}/{{forloop.counter}}">
+                    <a href="{{forloop.counter}}/">
                         <h4>Semester - {{ forloop.counter }}</h4>
                     </a>
                     <a class="btn text-uppercase link" href="{{course.slug}}/{{forloop.counter}}">VIew
