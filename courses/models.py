@@ -23,3 +23,7 @@ class Paper(models.Model):
 
     def __str__(self):
         return self.paper_name
+
+class Year(models.Model):
+    year = models.IntegerField(default=0)
+    
