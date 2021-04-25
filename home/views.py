@@ -37,7 +37,6 @@ def index(request):
     if request.method == "POST":
         form = CreateUserFrom(request.POST)
         if not checkUser(form.data['username']):
-            print(form.is_valid())
             if form.is_valid():
                 user = form.save()
                 user.save()
