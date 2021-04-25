@@ -29,6 +29,7 @@ class Year(models.Model):
     year = models.IntegerField(default=0)
     paper_name = models.ForeignKey(Paper, null=True, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, null=True, on_delete=models.CASCADE)
+    upload_paper = models.FileField(upload_to='papers', default="")
 
     def __str__(self):
         return f'{self.year} - {self.paper_name}'
