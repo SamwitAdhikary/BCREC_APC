@@ -44,7 +44,7 @@ class sendEmail:
         """
         self.config_msg()
         
-    def registerOtpBody(self, otp):
+    def registerOtpBody(self, link):
         self.msg['Subject'] = f"{self.user_name} Verify Email for Registration"
         self.html = f"""\
         <html>
@@ -57,7 +57,8 @@ class sendEmail:
                     <img style="height: 250px;width:400px" src="https://i.ibb.co/G9c0S63/header-img.png"
                 alt="welcome-image">
                     <p>To complete the process of Registration, you need to active your account.</p>
-                    <h3>Your OTP is <a href="#"><em style="color: #6609df;">{otp}</em></a>.</h3> <br><br>
+                    <h3>Click <a href="{link}"><em style="color: #6609df;">here</em></a> to complete your
+                    registration.</h3> <br><br>
                     <p>If you didn't intend this, just ignore this message</p>
                 </div>
                 <code>
@@ -87,6 +88,6 @@ class sendEmail:
         self.register_msgBody()
         self.send_MSG()
 
-    def sendOtp(self, otp):
-        self.registerOtpBody(otp)
+    def sendOtp(self, link):
+        self.registerOtpBody(link)
         self.send_MSG()
