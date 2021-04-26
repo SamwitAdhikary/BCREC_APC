@@ -783,7 +783,7 @@ th {
 }
 
 .section-gap {
-  padding: 120px 0;
+  padding: 70px 0;
 }
 
 @media (max-width: 991px) {
@@ -4590,4 +4590,8 @@ h6 {
   text-align: center;
   font-size: 1rem;
   font-weight: 600;
+}
+
+.notVerified {
+  margin-top: 3rem;
 }

@@ -403,9 +403,9 @@
 
 {% block body %}
 
-{% if not profile.is_verify %}
+{% if not profile.is_bcrecian %}
 <div class="alert alert-warning warning" role="alert">
-    You account is not verified, <a href="/verify-user">VERIFY</a> it to use all the features.
+    You account is not verified as a BCRECIAN, <a href="">VERIFY</a> it to use all the features.
 </div>
 {% endif %}
 
@@ -433,7 +433,7 @@
                 <span id="country" class="country">{{ profile.state }}</span>
             </div>
         </div>
-        {% if profile.is_verify %}
+        {% if profile.is_bcrecian %}
         <div class="profile-option">
             <div class="notification">
                 <i class="fa fa-edit"></i>
@@ -529,7 +529,7 @@
 </div>
 
 {% endblock body %}
-
+{% block alert %} {% endblock %}
 {% block script %}
 <script>
     $(".nav ul li").click(function () {

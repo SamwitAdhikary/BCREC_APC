@@ -52,10 +52,11 @@ def index(request):
         else:
             messages.error(
                 request, "Sorry this username is not avaliable, please choose another one.")
+    user = User.objects.filter(username=request.user).first()
 
     context = {
         'allcourses': Course.objects.all(), 'yt_videos': YoutubeVideos.objects.all(), 'developers': Developers.objects.all(),
-        'form': form
+        'form': form, 'profile': UserProfileInfo.objects.filter(user=user).first() if user else {}
     }
     return render(request, 'home/index.html', context)
 
@@ -64,14 +65,16 @@ def index(request):
 def verify_user(request):
     user = request.user
     user_info = UserProfileInfo.objects.filter(user=user).first()
-
-    print(f"http://127.0.0.1:8000/verify-otp/{user}/{user.email}/{user_info.autogen_otp}/{user.password}/")
-
-    sendLink = sendEmail(user_name=user, user_email=user.email)
-    sendLink.sendOtp(
-        f"http://127.0.0.1:8000/verify-otp/{user}/{user.email}/{user_info.autogen_otp}/{user.password}/")
-    return render(request, 'home/verify.html', {
-    })
+    if not user_info.is_verify:
+        sendLink = sendEmail(user_name=user, user_email=user.email)
+        sendLink.sendOtp(
+            f"http://127.0.0.1:8000/verify-otp/{user}/{user.email}/{user_info.autogen_otp}/{user.password}/")
+        return render(request, 'home/verify.html', {
+        })
+    else:
+        return render(request, 'home/success.html', {
+            'msg': 'Your account is already verified !! Now you can all the features.'
+        })
 
 
 def verify_otp(request, username, email, password, otp):
