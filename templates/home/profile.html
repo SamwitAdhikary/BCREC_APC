@@ -390,7 +390,7 @@
                     <span class="box">
                         <a href="/">Home </a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="/profile">profile</a>
+                        <a href="/profile/">profile</a>
                     </span>
                 </div>
             </div>
@@ -434,12 +434,12 @@
             </div>
         </div>
         {% if profile.is_bcrecian %}
-        <div class="profile-option">
+        <a class="btn profile-option" href="/{{profile.autogen_otp}}/update-profile/">
             <div class="notification">
                 <i class="fa fa-edit"></i>
                 <!-- <span class="alert-message">1</span> -->
             </div>
-        </div>
+        </a>
         {% endif %}
     </div>
 

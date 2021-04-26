@@ -1,8 +1,9 @@
+from email import message
 from random import randint
-from django.http.response import HttpResponseRedirect
+from django.http.response import Http404, HttpResponseRedirect
 import requests
 
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import get_object_or_404, render, HttpResponse, redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -13,7 +14,7 @@ from .models import Contact, UserProfileInfo, User, YoutubeVideos, Developers
 from courses.models import Course
 from django.contrib import messages
 
-from .forms import CreateUserFrom
+from .forms import CreateUserFrom, UpdateForm
 
 # CONSTANTS
 OTP = None
@@ -174,3 +175,33 @@ def loginUser(request):
             messages.error(request, 'Wrong Credentials!!')
 
     return render(request, 'home/login.html')
+
+
+@login_required(login_url='/login/')
+def update(request, pk):
+    try:
+        user = get_object_or_404(UserProfileInfo, autogen_otp=pk)
+        # print(user)
+    except Exception:
+        raise Http404("Does not exist")
+
+    if request.method == "POST":
+        form = UpdateForm(request.POST, instance=user)
+        # print(form.is_valid())
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Updated')
+        else:
+            messages.error(request, 'Not Saved')
+
+    else:
+        form = UpdateForm(instance=user)
+
+    # print(form.errors)
+
+    context = {'u_fm': form}
+    
+    return render(request, 'home/update-profile.html', context)
+
+    

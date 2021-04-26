@@ -1,0 +1,65 @@
+{% extends "basic.html" %}
+
+{% block banner %}
+
+<!-- ================ start banner Area ================= -->
+<section class="banner-area">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-12 banner-right">
+                <h1 class="text-white">
+                    Profile
+                </h1>
+                <p class="mx-auto text-white  mt-20 mb-40">
+                    You can manage your personal info from your profile.
+                </p>
+                <div class="link-nav">
+                    <span class="box">
+                        <a href="/">Home </a>
+                        <i class="lnr lnr-arrow-right"></i>
+                        <a href="/profile">profile</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ End banner Area ================= -->
+
+{% endblock banner %}
+
+{% block body %}
+
+<div class="text-center mt-5">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-info font" style="width: 300px; margin-left: 530px;">
+        <b>{{message}}</b>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <h3 class="text-info font"><b>Update Form</b></h3><br>
+        <span class="text-danger font"><b>{{u_fm.name.errors}}</b></span>
+        <span><b>{{u_fm.name.label}}</b></span> {{u_fm.name}} <br><br>
+        <span class="text-danger font"><b>{{u_fm.phone_number.errors}}</b></span>
+        <span><b>{{u_fm.phone_number.label}}</b></span> {{u_fm.phone_number}} <br><br>
+        <span class="text-danger font"><b>{{u_fm.college_name.errors}}</b></span>
+        <span><b>{{u_fm.college_name.label}}</b></span> {{u_fm.college_name}} <br><br>
+        <span class="text-danger font"><b>{{u_fm.state.errors}}</b></span>
+        <span><b>{{u_fm.state.label}}</b></span> {{u_fm.state}} <br><br>
+        <span class="text-danger font"><b>{{u_fm.course.errors}}</b></span>
+        <span><b>{{u_fm.course.label}}</b></span> {{u_fm.course}} <br><br>
+        <span class="text-danger font"><b>{{u_fm.Semester.errors}}</b></span>
+        <span><b>{{u_fm.Semester.label}}</b></span> {{u_fm.Semester}} <br><br>
+        <span class="text-danger font"><b>{{u_fm.bio.errors}}</b></span>
+        <span><b>{{u_fm.bio.label}}</b></span> {{u_fm.bio}} <br><br>
+        <span class="text-danger font"><b>{{u_fm.portfolio_site.errors}}</b></span>
+        <span><b>{{u_fm.portfolio_site.label}}</b></span> {{u_fm.portfolio_site}} <br><br>
+        <button>Update</button>
+    </form>
+</div>
+
+{% endblock body %}

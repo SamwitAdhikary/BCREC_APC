@@ -49,7 +49,7 @@ class UserProfileInfo(models.Model):
     autogen_otp = models.IntegerField()
     name = models.CharField(max_length=20, blank=True)
     phone_number = models.CharField(
-        max_length=20, default="add mobile number")
+        max_length=20, default="")
     college_name = models.CharField(
         max_length=200, default="Dr. B.C. Roy Engineering College - Durgapur")
     state = models.CharField(max_length=50, default="West Bengal")
