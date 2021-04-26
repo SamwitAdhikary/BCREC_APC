@@ -64,6 +64,9 @@ def index(request):
 def verify_user(request):
     user = request.user
     user_info = UserProfileInfo.objects.filter(user=user).first()
+
+    print(f"http://127.0.0.1:8000/verify-otp/{user}/{user.email}/{user_info.autogen_otp}/{user.password}/")
+
     sendLink = sendEmail(user_name=user, user_email=user.email)
     sendLink.sendOtp(
         f"http://127.0.0.1:8000/verify-otp/{user}/{user.email}/{user_info.autogen_otp}/{user.password}/")
