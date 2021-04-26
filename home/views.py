@@ -1,8 +1,9 @@
+from email import message
 from random import randint
-from django.http.response import HttpResponseRedirect
+from django.http.response import Http404, HttpResponseRedirect
 import requests
 
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import get_object_or_404, render, HttpResponse, redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -13,7 +14,7 @@ from .models import Contact, UserProfileInfo, User, YoutubeVideos, Developers
 from courses.models import Course
 from django.contrib import messages
 
-from .forms import CreateUserFrom
+from .forms import CreateUserFrom, UpdateForm
 
 # CONSTANTS
 OTP = None
@@ -40,7 +41,8 @@ def index(request):
             if form.is_valid():
                 user = form.save()
                 user.save()
-                user_detils = UserProfileInfo(user=user)
+                user_detils = UserProfileInfo(
+                    user=user, autogen_otp=randint(100000, 999999))
                 user_detils.save()
                 login(request, user)
             else:
@@ -51,40 +53,49 @@ def index(request):
         else:
             messages.error(
                 request, "Sorry this username is not avaliable, please choose another one.")
+    user = User.objects.filter(username=request.user).first()
 
     context = {
         'allcourses': Course.objects.all(), 'yt_videos': YoutubeVideos.objects.all(), 'developers': Developers.objects.all(),
-        'form': form
+        'form': form, 'profile': UserProfileInfo.objects.filter(user=user).first() if user else {}
     }
     return render(request, 'home/index.html', context)
 
 
-def verify_otp(request, email, name, password, phNo):
-    global OTP
-    if request.method == "POST":
-        if not OTP:
-            OTP = randint(1111, 9999)
-            print(OTP)
-            # send_mail = sendEmail(user_name=name,user_email=email)
-            # send_mail.sendOtp(otp=OTP)
-        else:
-            user_otp = request.POST.get('otp')
-            if user_otp and int(user_otp) == OTP:
-                OTP = None
-                user = User(username=name, password=password, email=email)
-                user.save()
-                if phNo:
-                    user_details = UserProfileInfo(
-                        user=user, phone_number=phNo)
-                    user_details.save()
-                login(request, user)
-                return redirect('HomePage')
-            OTP = None
-            return HttpResponse("Wrong OTP, Try again ! <a href='/'>Back to Home</a>")
-
-        return render(request, 'home/verify-otp.html', {
-            'email': email, 'username': name, 'password': password, 'phNo': phNo
+@login_required
+def verify_user(request):
+    user = request.user
+    user_info = UserProfileInfo.objects.filter(user=user).first()
+    if not user_info.is_verify:
+        sendLink = sendEmail(user_name=user, user_email=user.email)
+        sendLink.sendOtp(
+            f"http://127.0.0.1:8000/verify-otp/{user}/{user.email}/{user_info.autogen_otp}/{user.password}/")
+        return render(request, 'home/verify.html', {
         })
+    else:
+        return render(request, 'home/success.html', {
+            'msg': 'Your account is already verified !! Now you can all the features.'
+        })
+
+
+def verify_otp(request, username, email, password, otp):
+    user = User.objects.filter(username=username).first()
+
+    if user and user.email == email:
+        userInfo = UserProfileInfo.objects.filter(user=user).first()
+        if not userInfo.is_verify:
+            if userInfo.autogen_otp == otp:
+                UserProfileInfo.objects.filter(
+                    user=user).update(is_verify=True)  # update to verify
+                return render(request, 'home/success.html', {
+                    'msg': 'Your account is verified successfully, Now you can use all the features.'
+                })
+        else:
+            return render(request, 'home/success.html', {
+                'msg': 'Your account is already verified !! Now you can all the features.'
+            })
+
+    return HttpResponse("Invalid !!")
 
 
 @login_required(login_url='/login/')
@@ -164,3 +175,33 @@ def loginUser(request):
             messages.error(request, 'Wrong Credentials!!')
 
     return render(request, 'home/login.html')
+
+
+@login_required(login_url='/login/')
+def update(request, pk):
+    try:
+        user = get_object_or_404(UserProfileInfo, autogen_otp=pk)
+        # print(user)
+    except Exception:
+        raise Http404("Does not exist")
+
+    if request.method == "POST":
+        form = UpdateForm(request.POST, instance=user)
+        # print(form.is_valid())
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Updated')
+        else:
+            messages.error(request, 'Not Saved')
+
+    else:
+        form = UpdateForm(instance=user)
+
+    # print(form.errors)
+
+    context = {'u_fm': form}
+    
+    return render(request, 'home/update-profile.html', context)
+
+    

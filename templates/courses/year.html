@@ -34,21 +34,21 @@
 <!-- ================ End banner Area ================= -->
 
 {% endblock banner %}
-{% block alert %} {% endblock %}
+
 {% block body %}
 
 <!--================ Start Course Details Area =================-->
 <section class="course-details-area section-gap">
     <div class="container">
-        <h4 class="title">{{papers.0.course.title }} Sem {{ papers.0.semester }}</h4>
+        <h4 class="title">{{year.0.year }}</h4>
         <div class="content">
             <ul class="course-list">
-                {% for paper in papers %}
+                {% for years in year %}
                 <li class="justify-content-between d-flex">
-                    <a href="{{paper.paper_code}}/">
-                        <h4>{{ paper.paper_name }}</h4>
+                    <a href="/media/{{years.upload_paper}}">
+                        <h4>{{ years.upload_paper }}</h4>
                     </a>
-                    <a class="btn text-uppercase" href="{{paper.paper_code}}">{{ paper.paper_code }}</a>
+                    <a class="btn text-uppercase" href="{{year.year}}">{{ paper.paper_code }}</a>
                 </li>
                 {% endfor %}
             </ul>

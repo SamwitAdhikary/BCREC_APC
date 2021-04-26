@@ -390,7 +390,7 @@
                     <span class="box">
                         <a href="/">Home </a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="/profile">profile</a>
+                        <a href="/profile/">profile</a>
                     </span>
                 </div>
             </div>
@@ -403,10 +403,10 @@
 
 {% block body %}
 
-{% if not profile.is_verify %}
-    <div class="alert alert-warning warning" role="alert">
-        You account is not verified, <a href="">VERIFY</a> it to use all the features.
-    </div>
+{% if not profile.is_bcrecian %}
+<div class="alert alert-warning warning" role="alert">
+    You account is not verified as a BCRECIAN, <a href="">VERIFY</a> it to use all the features.
+</div>
 {% endif %}
 
 <div class="container">
@@ -433,13 +433,13 @@
                 <span id="country" class="country">{{ profile.state }}</span>
             </div>
         </div>
-        {% if profile.is_verify %}
-        <div class="profile-option">
+        {% if profile.is_bcrecian %}
+        <a class="btn profile-option" href="/{{profile.autogen_otp}}/update-profile/">
             <div class="notification">
                 <i class="fa fa-edit"></i>
                 <!-- <span class="alert-message">1</span> -->
             </div>
-        </div>
+        </a>
         {% endif %}
     </div>
 
@@ -507,10 +507,10 @@
                         personal datas like aadhar or votar card. you can upload anything and access that anytime you
                         want. <b>YOUR DATA IS 100% SECURE WITH US !</b></p>
                     {% if profile.portfolio_site %}
-                        <a target="_blank" href="{{profile.portfolio_site}}">Your Portfolio website</a><br>
+                    <a target="_blank" href="{{profile.portfolio_site}}">Your Portfolio website</a><br>
                     {% endif %}
                     {% if profile.upload_cv %}
-                        <a target="_blank" href="/media/{{profile.upload_cv}}">Download your CV</a>
+                    <a target="_blank" href="/media/{{profile.upload_cv}}">Download your CV</a>
                     {% endif %}
                 </div>
                 <div class="profile-settings tab">
@@ -529,7 +529,7 @@
 </div>
 
 {% endblock body %}
-
+{% block alert %} {% endblock %}
 {% block script %}
 <script>
     $(".nav ul li").click(function () {

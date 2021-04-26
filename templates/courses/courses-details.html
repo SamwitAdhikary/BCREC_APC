@@ -32,7 +32,7 @@
 <!-- ================ End banner Area ================= -->
 
 {% endblock banner %}
-
+{% block alert %} {% endblock %}
 {% block body %}
 
 <!--================ Start Course Details Area =================-->
@@ -48,7 +48,6 @@
     <div class="container">
         <h4 class="title">{{course.title}} Semesters</h4>
         <div class="content">
-            {% if user.is_authenticated %}
             <ul class="course-list">
                 {% with ''|center:sem as range %}
                 {% for _ in range %}
@@ -63,7 +62,6 @@
                 {% endwith %}
             </ul>
             <hr>
-            {% endif %}
             <ul class="course-list">
                 <li class="justify-content-between d-flex">
                     <a href="">
