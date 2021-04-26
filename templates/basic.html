@@ -110,7 +110,6 @@
   
   <!-- {% block navbar %} {% endblock navbar %} -->
 
-  
   {% block banner %} {% endblock banner %}
   
   {% block body %} {% endblock body %}
@@ -118,6 +117,15 @@
   {% block feature %} {% endblock feature %}
 
   {% block about %} {% endblock about %}
+  
+  {% block alert %}
+  {% if not user.is_anonymous and not profile.is_verify %}
+    <div class="alert alert-warning warning notVerified" role="alert">
+      You account is not verified, <a href="/verify-user">VERIFY</a> for download papers.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %}
+  {% endblock alert %}
 
   {% block popular-courses %} {% endblock popular-courses %}
 
