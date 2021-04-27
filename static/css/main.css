@@ -4595,3 +4595,7 @@ h6 {
 .notVerified {
   margin-top: 3rem;
 }
+
+.helptext {
+  text-align: left;
+}
