@@ -413,9 +413,9 @@
     <div class="profile-header">
         <div class="profile-img">
             {% if  profile.profile_pic %}
-            <img src="/media/{{ profile.profile_pic }}" width="200" alt="Profile Image">
+            <a href="/{{profile.autogen_otp}}/update-image/"><img src="/media/{{profile.profile_pic}}" width="200" alt="Profile Image"></a>
             {% else %}
-            <img src="/media/pofile_pics/default.jpg" width="200" alt="Profile Image">
+            <a href="/{{profile.autogen_otp}}/update-image/"><img src="/media/pofile_pics/default.jpg" width="200" alt="Profile Image"></a>
             {% endif %}
         </div>
         <div class="profile-nav-info">
@@ -497,9 +497,7 @@
             <div class="profile-body">
                 <div class="profile-posts tab">
                     <h1>Your Bio</h1>
-                    <p>{{ profile.bio }} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas harum ea, rem
-                        laborum blanditiis perferendis sint, fugit accusantium sit quo, veritatis temporibus velit
-                        provident voluptates repudiandae nisi autem tenetur ad.</p>
+                    <p>{{ profile.bio }}</p>
                 </div>
                 <div class="profile-reviews tab">
                     <h1>Personal Data</h1>

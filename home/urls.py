@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 
 urlpatterns = [
@@ -11,6 +11,7 @@ urlpatterns = [
     path('verify-otp/<str:username>/<str:email>/<int:otp>/<str:password>/',
          views.verify_otp, name="verifyOTP"),
     path('<str:pk>/update-profile/', views.update, name="UpdateProfile"),
+    path('<str:pk>/update-image/', views.updateImage, name="UpdateImage"),
     path('logout/', views.logoutUser, name='logout'),
     path('overview/', views.overview, name="OverViewPage"),
     path('mission-and-overview/', views.mission_and_vision, name="MissionPage"),

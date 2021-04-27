@@ -35,19 +35,9 @@
 
 <!-- ================ Start contact-page Area  ================= -->
 
-<section class="contact-page-area section-gap">
-    <div class="container">
-        <!-- {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-info font">
-            <b>{{message}}</b>
-        </div>
-        {% endfor %}
-        {% endif %} -->
-        <form method="post" novalidate>
-            {% csrf_token %}
-
-            {% for hidden_field in form.hidden_fields %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for hidden_field in form.hidden_fields %}
             {{ hidden_field }}
             {% endfor %}
 
@@ -84,11 +74,10 @@
             </div>
             {% endfor %}
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+    <button type="submit" class="btn btn-primary">Upload</button>
+  </form>
 
-    </div>
-</section>
+  <p><a href="/">Return to home</a></p>
 
 <!-- ================ End contact-page Area ================= -->
 

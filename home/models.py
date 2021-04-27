@@ -54,11 +54,11 @@ class UserProfileInfo(models.Model):
         max_length=200, default="Dr. B.C. Roy Engineering College - Durgapur")
     state = models.CharField(max_length=50, default="West Bengal")
     # install pillow lib, if you want to work with images.
-    profile_pic = models.ImageField(upload_to='pofile_pics', blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
     course = models.CharField(
         max_length=10, choices=Course_CHOICES, default='BCA')
     Semester = models.IntegerField(choices=Sem_CHOICES, default=1)
-    bio = models.CharField(max_length=500, default="update your bio.")
+    bio = models.TextField(default="Update Your Bio")
     portfolio_site = models.URLField(blank=True, default="")
     upload_cv = models.FileField(upload_to="user_cvs", blank=True)
 
