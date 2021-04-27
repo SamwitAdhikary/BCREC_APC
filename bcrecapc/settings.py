@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'blog.apps.BlogConfig',
-    'courses.apps.CoursesConfig'
+    'courses.apps.CoursesConfig',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

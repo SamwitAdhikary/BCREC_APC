@@ -16,5 +16,14 @@ class UpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfileInfo
         fields = [
-            'name', 'phone_number', 'college_name', 'state', 'course', 'Semester', 'bio', 'portfolio_site',
+            'name', 'phone_number', 'college_name', 'state', 'bio', 'portfolio_site',
+        ]
+
+        # fields = '__all__'
+
+class UpdateImageForm(forms.ModelForm):
+    class Meta:
+        model = UserProfileInfo
+        fields = [
+            'profile_pic'
         ]

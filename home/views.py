@@ -14,7 +14,7 @@ from .models import Contact, UserProfileInfo, User, YoutubeVideos, Developers
 from courses.models import Course
 from django.contrib import messages
 
-from .forms import CreateUserFrom, UpdateForm
+from .forms import CreateUserFrom, UpdateForm, UpdateImageForm
 
 # CONSTANTS
 OTP = None
@@ -186,12 +186,13 @@ def update(request, pk):
         raise Http404("Does not exist")
 
     if request.method == "POST":
-        form = UpdateForm(request.POST, instance=user)
+        form = UpdateForm(request.POST, request.FILES, instance=user)
         # print(form.is_valid())
 
         if form.is_valid():
             form.save()
             messages.success(request, 'Updated')
+            return redirect('/profile')
         else:
             messages.error(request, 'Not Saved')
 
@@ -200,8 +201,35 @@ def update(request, pk):
 
     # print(form.errors)
 
-    context = {'u_fm': form}
+    context = {'form': form}
     
     return render(request, 'home/update-profile.html', context)
 
     
+@login_required(login_url='/login/')
+def updateImage(request, pk):
+    try:
+        user = get_object_or_404(UserProfileInfo, autogen_otp=pk)
+        # print(user)
+    except Exception:
+        raise Http404("Does not exist")
+
+    if request.method == "POST":
+        form = UpdateImageForm(request.POST, request.FILES, instance=user)
+        # print(form.is_valid())
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Updated')
+            return redirect('/profile')
+        else:
+            messages.error(request, 'Not Saved')
+
+    else:
+        form = UpdateImageForm(instance=user)
+
+    print(form.errors)
+
+    context = {'form': form}
+    
+    return render(request, 'home/update-image.html', context)

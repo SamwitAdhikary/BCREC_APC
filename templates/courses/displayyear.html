@@ -47,12 +47,10 @@
             <ul class="course-list">
                 {% for year in papers %}
                 <li class="justify-content-between d-flex">
-                    <a href="#" target="_blank">
+                    <a href="#">
                         <h4>{{ year.year }}</h4>
                     </a>
-                    {% if not profile.is_verify %}
-                    <a class="btn text-uppercase" data-bs-toggle="modal" data-bs-target="#exampleModal">Download</a>
-                    {% elif not profile.is_bcrecian %}
+                    {% if not user.is_authenticated %}
                     <a class="btn text-uppercase" data-bs-toggle="modal" data-bs-target="#exampleModal">Download</a>
                     {% else %}
                     <a class="btn text-uppercase" href="/media/{{year.upload_paper}}" target="_blank">Download</a>
@@ -68,21 +66,15 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Account Not Verified</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Account Not Logged In</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        {% if not profile.is_verify %}
         <div class="modal-body">
-          Your Account is not verified. Verify your Account
+          Log in or create account to download papers.
         </div>
-        {% elif not profile.is_bcrecian %}
-        <div class="modal-body">
-          Your Account is not verified as <strong>BCRECIAN</strong> account. Verify to Download Papers.
-        </div>
-        {% endif %}
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Not Now</button>
-          <a class="btn btn-primary" href="/profile">Verify</a>
+            <a class="btn btn-secondary" href="/#Registration-Section">Register</a>
+          <a class="btn btn-primary" href="/login">Login</a>
         </div>
       </div>
     </div>
@@ -90,3 +82,4 @@
 <!--================ End Course Details Area =================-->
 
 {% endblock body %}
+{% block alert %} {% endblock %}

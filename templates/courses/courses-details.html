@@ -36,17 +36,10 @@
 {% block body %}
 
 <!--================ Start Course Details Area =================-->
-<section class="course-details-area">
-    <div class="container">
-        <h4 class="title">{{course.description}}</h4>
-        <div class="content">
-            {{course.about_course|safe}}
-        </div>
-</section>
 
 <section class="course-details-area">
     <div class="container">
-        <h4 class="title">{{course.title}} Semesters</h4>
+        <h4 class="title">{{course.title}} Question Papers</h4>
         <div class="content">
             <ul class="course-list">
                 {% with ''|center:sem as range %}
@@ -70,6 +63,14 @@
                     <a class="btn text-uppercase link" href="">Download</a>
                 </li>
             </ul>
+        </div>
+</section>
+
+<section class="course-details-area">
+    <div class="container">
+        <h4 class="title">{{course.description}}</h4>
+        <div class="content">
+            {{course.about_course|safe}}
         </div>
 </section>
 
