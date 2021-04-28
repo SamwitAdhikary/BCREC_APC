@@ -262,11 +262,13 @@ $(function() {
 });
 
 // Js for Registration form
-$("#id_email ,#id_username ,#id_password1 ,#id_password2").addClass('form-control')
+$("#id_email ,#id_username ,#id_password1 ,#id_password2 ,#id_new_password1, #id_new_password2").addClass('form-control')
 $("#id_username").attr('placeholder', "User name")
 $("#id_email").attr('placeholder', "Email Address")
 $("#id_password1").attr('placeholder', "Password")
 $("#id_password2").attr('placeholder', "Confirm Password")
+$("#id_new_password1").attr('placeholder', "Password")
+$("#id_new_password2").attr('placeholder', "Confirm Password")
 
 // Toggle Password (show -- Hide)
 
