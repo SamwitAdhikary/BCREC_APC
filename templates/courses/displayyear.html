@@ -50,7 +50,7 @@
                     <a href="#">
                         <h4>{{ year.year }}</h4>
                     </a>
-                    {% if not user.is_authenticated %}
+                    {% if not profile.is_verify %}
                     <a class="btn text-uppercase" data-bs-toggle="modal" data-bs-target="#exampleModal">Download</a>
                     {% else %}
                     <a class="btn text-uppercase" href="/media/{{year.upload_paper}}" target="_blank">Download</a>
@@ -66,15 +66,15 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Account Not Logged In</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Account Not Verified</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Log in or create account to download papers.
+          Account Not Verified. Verify to download papers.
         </div>
         <div class="modal-footer">
-            <a class="btn btn-secondary" href="/#Registration-Section">Register</a>
-          <a class="btn btn-primary" href="/login">Login</a>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">Not Now</button>
+          <a class="btn btn-primary" href="/verify-user">Verify</a>
         </div>
       </div>
     </div>

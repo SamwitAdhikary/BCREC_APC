@@ -44,7 +44,7 @@
         </div>
         {% endfor %}
         {% endif %} -->
-        <form method="post" novalidate>
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             {% for hidden_field in form.hidden_fields %}

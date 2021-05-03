@@ -16,7 +16,7 @@ class UpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfileInfo
         fields = [
-            'name', 'phone_number', 'college_name', 'state', 'bio', 'portfolio_site',
+            'name', 'phone_number', 'college_name', 'state', 'bio', 'portfolio_site', 'upload_cv'
         ]
 
         # fields = '__all__'

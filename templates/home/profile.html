@@ -412,10 +412,14 @@
 <div class="container">
     <div class="profile-header">
         <div class="profile-img">
+            {% if profile.is_bcrecian %}
             {% if  profile.profile_pic %}
-            <a href="/{{profile.autogen_otp}}/update-image/"><img src="/media/{{profile.profile_pic}}" width="200" alt="Profile Image"></a>
+            <a href="/{{profile.autogen_otp}}/update-image/"><img src="/media/{{profile.profile_pic}}" width="200" alt="Profile Image" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to change profile picture" ></a>
             {% else %}
-            <a href="/{{profile.autogen_otp}}/update-image/"><img src="/media/pofile_pics/default.jpg" width="200" alt="Profile Image"></a>
+            <a href="/{{profile.autogen_otp}}/update-image/"><img src="/media/pofile_pics/default.jpg" width="200" alt="Profile Image" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to change profile picture"></a>
+            {% endif %}
+            {% else %}
+            <img src="/media/pofile_pics/default.jpg" width="200" alt="Profile Image">
             {% endif %}
         </div>
         <div class="profile-nav-info">
