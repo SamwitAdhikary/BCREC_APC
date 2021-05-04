@@ -166,13 +166,16 @@ def committees(request):
 
 def loginUser(request):
     if request.method == "POST":
-        user = authenticate(username=request.POST.get(
+        user = authenticate(request=request, username=request.POST.get(
             'username'), password=request.POST.get('password'))
         if user and user.is_active:
             login(request, user)
             return HttpResponseRedirect(reverse('HomePage'))
         else:
             messages.error(request, 'Wrong Credentials!!')
+
+        if user is not None:
+            login(request, user)
 
     return render(request, 'home/login.html')
 
