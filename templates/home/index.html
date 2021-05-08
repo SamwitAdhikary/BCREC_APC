@@ -14,7 +14,7 @@
         <h1 class="text-white">
           {% if user.is_authenticated %}
           Welcome <br>
-          {{ user.username }}
+          {{ user.username|title }}
           {% else %}
           Previous Year Examination <br />
           Question Papers
