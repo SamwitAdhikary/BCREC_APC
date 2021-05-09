@@ -205,6 +205,7 @@ def update(request, pk):
     # print(form.errors)
 
     context = {'form': form}
+    print(context)
     
     return render(request, 'home/update-profile.html', context)
 
