@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'axes.middleware.AxesMiddleware',
+
 ]
 
 ROOT_URLCONF = 'bcrecapc.urls'
@@ -174,4 +175,5 @@ AUTHENTICATION_BACKENDS = [
 
 AXES_FAILURE_LIMIT = 3
 AXES_COOLOFF_TIME = 1
-AXES_ONLY_USER_FAILURE = True
+AXES_ONLY_USER_FAILURES = True
+AXES_RESET_ON_SUCCESS: True

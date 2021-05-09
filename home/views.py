@@ -32,7 +32,7 @@ def checkUser(username):
     return User.objects.filter(username=username).exists()
 
 
-def index(request):
+def index(request, backend='django.contrib.auth.backends.ModelBackend'):
     form = CreateUserFrom()
 
     if request.method == "POST":
@@ -44,7 +44,7 @@ def index(request):
                 user_detils = UserProfileInfo(
                     user=user, autogen_otp=randint(100000, 999999))
                 user_detils.save()
-                login(request, user)
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             else:
                 if form.data['password1'] != form.data['password2']:
                     messages.error(request, 'Password Mismatched !')
